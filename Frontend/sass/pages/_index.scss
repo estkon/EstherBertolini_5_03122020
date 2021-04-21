@@ -1,0 +1,25 @@
+.ours{
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 1em;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    &__img{
+        margin-right: 10px;
+        width: 100%;
+    }
+    & img{
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 15px 15px 0px 0px;
+        }
+    &__texte{
+        text-align: center;
+    }
+    &__info{
+        display: flex;
+    }
+    }  

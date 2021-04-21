@@ -1,0 +1,14 @@
+.ours__texte--boutons{
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin-left: 32%;
+    & button{
+            border-radius: 2em;
+            padding: 2px 10px;
+            font-size: 12px;
+            background: $colour-secondary;
+            color: white;
+            font-weight: 600;
+    }
+}

@@ -1,8 +1,72 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+html {
+  background-color: darkgrey;
+}
+
 body {
   width: 340px;
   margin: auto;
   font-family: Roboto;
+  background-color: #f3e9f1;
+}
+
+main {
+  background-color: #f3e9f1;
+  width: 90%;
+  margin: auto;
+  border-radius: 1em;
+  padding-bottom: 20px;
+}
+
+h1 {
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0px;
+  padding-left: 15px;
+  background: linear-gradient(90deg, #d78232 10%, #6a5ca4 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+h2 {
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  line-height: 0.7;
+  padding: 20px;
+}
+
+h3 {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #d78232;
+}
+
+.ours__texte--description {
+  margin-top: 0px;
+  font-size: 13px;
+}
+.ours__texte--prix {
+  font-size: 27px;
+  line-height: 0.4;
+  margin-top: 20px;
+  color: #6a5ca4;
+}
+
+.ours__texte--boutons {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  margin-left: 32%;
+}
+.ours__texte--boutons button {
+  border-radius: 2em;
+  padding: 2px 10px;
+  font-size: 12px;
+  background: #6a5ca4;
+  color: white;
+  font-weight: 600;
 }
 
 header {
@@ -32,6 +96,7 @@ header {
   margin: 0px;
   font-size: 19px;
   font-weight: 600;
+  color: black;
 }
 
 .header__logo {
@@ -39,18 +104,7 @@ header {
   justify-content: center;
   flex-direction: column;
 }
-.header__logo h1 {
-  font-size: 17px;
-  line-height: 1.7;
-  margin: 0px;
-  margin-top: -8px;
-  padding-left: 15px;
-  background: linear-gradient(90deg, #d78232 10%, #6a5ca4 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-.header__logo h1--image {
+.header__logo--image {
   margin-bottom: -8px;
 }
 
@@ -65,13 +119,6 @@ button:hover {
 .decouverte {
   background-color: #d78232;
 }
-.decouverte h2 {
-  color: white;
-  font-size: 15px;
-  text-align: center;
-  line-height: 0.7;
-  padding: 10px 20px;
-}
 .decouverte__bold {
   text-transform: uppercase;
 }
@@ -84,6 +131,87 @@ button:hover {
   font-size: 13px;
   text-align: center;
   padding: 12px 0px;
+}
+
+footer {
+  background-color: #6a5ca4;
+  padding: 20px 20px 40px 20px;
+}
+
+.banner {
+  background-color: #f3e9f1;
+  display: flex;
+  justify-content: space-between;
+  margin-right: -20px;
+  margin-left: -20px;
+  padding: 5px 20px;
+}
+.banner img {
+  width: 40%;
+}
+.banner i {
+  color: #6a5ca4;
+  font-size: 32px;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.social {
+  align-items: center;
+  display: flex;
+}
+
+.footer-texte a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+.footer-texte a:hover {
+  text-decoration: underline;
+}
+.footer-texte p {
+  line-height: 2;
+}
+
+.banner2 {
+  background-color: #f3e9f1;
+  color: #d78232;
+  display: flex;
+  justify-content: center;
+  margin-right: -20px;
+  margin-left: -20px;
+  padding: 5px 20px;
+  line-height: 0;
+}
+.banner2 p {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ours {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 1em;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.ours__img {
+  margin-right: 10px;
+  width: 100%;
+}
+.ours img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 15px 15px 0px 0px;
+}
+.ours__texte {
+  text-align: center;
+}
+.ours__info {
+  display: flex;
 }
 
 /*# sourceMappingURL=style.css.map */

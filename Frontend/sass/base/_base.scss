@@ -1,5 +1,17 @@
+html{
+    background-color: darkgrey;
+}
+
 body{
     width: 340px;
     margin:auto;
     font-family:Roboto;
+    background-color:$colour-back;
+}
+main{
+    background-color: $colour-back;
+    width:90%;
+    margin:auto;
+    border-radius: 1em;
+    padding-bottom: 20px;
 }
