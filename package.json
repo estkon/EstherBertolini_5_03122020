@@ -1,0 +1,11 @@
+{
+  "name": "estherbertolini_5_03122020",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./Frontend/sass/main.scss:./Frontend/public/css/style.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
