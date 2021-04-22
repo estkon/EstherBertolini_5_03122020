@@ -1,0 +1,80 @@
+.fiche{
+    margin-top:2em;
+    margin-left: 0.5em;
+    & .titre-underline{
+        font-size:14px;
+        text-decoration: underline;}
+    & p{
+        font-size: 12px;
+        font-style: italic;
+        line-height: 1.7;
+    }
+}
+.produit-adopter{
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em 0.2em;
+    & button{
+        line-height: 2;
+    }
+}
+
+/* menu déroulant*/
+*{
+    padding: 0px;
+}
+
+
+nav.ours__texte--boutons ul{
+    list-style-type: none;
+}
+
+.ours__texte--boutons ul li{
+    float: left;
+    text-align: center;
+    position: relative;
+    list-style-type: none;
+    margin-right: 15px;
+
+}
+
+.ours__texte--boutons a{
+    display: block;
+    text-decoration: none;
+    color:white;
+    border-bottom: 2px solid transparent;
+    line-height: 2;
+}
+
+
+.sous{
+    display: none;
+    box-shadow: 0px 1px 2px #CCC;
+    background-color: $colour-primary;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+.ours__texte--boutons > ul li:hover .sous{
+    display: block;
+}
+.sous li{
+    float: none;
+    width: 100%;
+    text-align: left;
+}
+
+.sous a{
+    border-bottom: none;
+    
+}
+.sous a:hover{
+    border-bottom: none;
+    background-color: RGBa(200,200,200,0.1);
+}
+
+
+.conteneur{
+  margin: 50px 20px;
+  height: 1500px;
+}

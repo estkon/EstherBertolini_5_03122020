@@ -6,6 +6,12 @@ body{
     width: 340px;
     margin:auto;
     font-family:Roboto;
+    background-color:white;
+}
+.accueil{
+    width: 340px;
+    margin:auto;
+    font-family:Roboto;
     background-color:$colour-back;
 }
 main{
@@ -13,5 +19,6 @@ main{
     width:90%;
     margin:auto;
     border-radius: 1em;
-    padding-bottom: 20px;
+    padding:1em 0.5em;
+    margin-bottom: 1em;
 }

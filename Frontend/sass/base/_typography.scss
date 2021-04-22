@@ -29,3 +29,16 @@ h3{
             color: $colour-secondary;
         }
     }
+.recapitulatif h3,.contenu-panier h3{
+        @include gradient;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        font-size: 19px;
+        font-weight: 500;
+        font-style: italic;
+        margin-bottom: 20px;
+        }
+.recapitulatif p{
+    font-size: 12px;
+}
