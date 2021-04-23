@@ -1,0 +1,52 @@
+footer{
+    background-color: $colour-secondary;
+    padding: 20px 20px 40px 20px;
+}
+
+.banner{
+    background-color: $colour-back;
+    display: flex;
+    justify-content: space-between;
+    margin-right: -20px;
+    margin-left: -20px;
+    padding: 5px 20px;
+    & img{
+        width:40%;
+    }
+    & i{
+        color:$colour-secondary;
+        font-size: 32px;
+        align-items: center;
+        margin-right:10px;
+    }
+}
+.social{
+        align-items: center;
+        display: flex;
+}
+.footer-texte{
+    & a{
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    & p{
+            line-height: 2;
+        }
+    }
+.banner2{
+    background-color: $colour-back;
+    color:$colour-primary;
+    display: flex;
+    justify-content: center;
+    margin-right: -20px;
+    margin-left: -20px;
+    padding: 5px 20px;
+    line-height: 0;
+& p{
+    font-size: 13px;
+    font-weight: 600; }
+}

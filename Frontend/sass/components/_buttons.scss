@@ -1,3 +1,25 @@
-.btn {
-    @include btn
+button.connexion{
+        padding: 2px 10px;
+        font-size: 12px;
+        color: black;
+        font-weight: 600;
+        background-color: transparent;
+}
+
+.ours__texte--boutons{
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin-left: 32%;}
+button, .deroulant{
+            border-radius: 2em;
+            padding: 2px 10px;
+            font-size: 12px;
+            background: $colour-secondary;
+            color: white;
+            font-weight: 600;
+    }
+.deroulant p{
+    margin: 0px;
+    padding: 0px 3px;
 }

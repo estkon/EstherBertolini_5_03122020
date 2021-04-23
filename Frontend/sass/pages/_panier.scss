@@ -1,0 +1,41 @@
+/*tableau*/
+table
+{
+    border-collapse: collapse;
+    background-color: white;
+    font-size: 12px;}
+
+    td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+    text-align: center;
+    & i{
+        color: darkred;
+    }
+}
+
+th{
+    background-color: $colour-secondary;
+    color:white;
+    padding: 0px 4px;
+}
+.photo-ref{
+    display: flex;
+}
+.contenu-panier__text{
+    font-size: 10px; 
+    text-align: left;
+    margin-left: 3px;
+    &--ref{
+    color:lightseagreen;
+    line-height: 0;
+    }
+    &--nom{
+        line-height: 0.9;
+        margin-top: 5px
+    }
+}
+.total{
+        text-align:left;
+        margin-left:5px;
+}

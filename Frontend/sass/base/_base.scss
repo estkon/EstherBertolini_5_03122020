@@ -1,17 +1,24 @@
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+html{
+    background-color: darkgrey;
 }
 
-html {
-    // 10px div by def of 16px
-    font-size: 62.5%;
+body{
+    width: 340px;
+    margin:auto;
+    font-family:Roboto;
+    background-color:white;
 }
-
-body {
-    box-sizing: border-box;
-    background: $colour-secondary;
+.accueil{
+    width: 340px;
+    margin:auto;
+    font-family:Roboto;
+    background-color:$colour-back;
+}
+main{
+    background-color: $colour-back;
+    width:90%;
+    margin:auto;
+    border-radius: 1em;
+    padding:1em 0.5em;
+    margin-bottom: 1em;
 }
