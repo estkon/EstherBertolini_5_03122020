@@ -8,7 +8,6 @@ h1{
     }
  h2{
     color: white;
-    font-size: 15px;
     text-align: center;
     line-height: 0.7;
     padding:20px;
@@ -41,4 +40,50 @@ h3{
         }
 .recapitulatif p{
     font-size: 12px;
+}
+/*medias queries*/
+
+@media only screen and (max-width: 320px) {
+    /*style petits smartphones en voie de disparition*/
+    h2{
+        font-size: 15px;
+    }
+    button.connexion{
+        font-size: 13px;
+    }
+    .decouverte__coeur{
+        font-size: 12px;
+    }
+    .decouverte h2 {
+        font-size: 13px;
+    }
+  }
+  @media only screen and (min-width: 321px) and (max-width: 799px) {
+    /*style smartphones et petites tablettes en portrait*/
+    .decouverte__coeur{
+        font-size: 13px;
+    }
+    .decouverte h2 {
+        font-size: 15px;
+    }
+    button.connexion{
+        font-size: 13px;
+    }
+  }
+  @media only screen and (min-width: 800px) and (max-width: 966px) {
+    /*style petites-moyennes tablettes */
+    
+}
+  @media (min-width: 966px) {
+    /*style desktop */
+
+    h2 .decouverte__coeur{
+        font-size: 20px;
+    }
+    .decouverte__coeur{
+        font-size: 18px;
+    }
+    button.connexion{
+        font-size: 16px;
+    }
 }

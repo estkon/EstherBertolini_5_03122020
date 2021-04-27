@@ -3,7 +3,6 @@ html{
 }
 
 body{
-    width: 340px;
     margin:auto;
     font-family:Roboto;
     background-color:white;
@@ -21,4 +20,39 @@ main{
     border-radius: 1em;
     padding:1em 0.5em;
     margin-bottom: 1em;
+}
+/*medias queries*/
+
+@media only screen and (max-width: 320px) {
+    /*style petits smartphones en voie de disparition*/
+    body{
+        width: 100%;
+    }
+
+  }
+  @media only screen and (min-width: 321px) and (max-width: 799px) {
+    /*style smartphones et petites tablettes en portrait*/
+    body{
+        width: 100%;
+    }
+
+  }
+  @media only screen and (min-width: 800px) and (max-width: 966px) {
+    /*style petites-moyennes tablettes */
+    body{
+        width: 100%;
+    }
+}
+  @media (min-width: 966px) {
+    /*style desktop */
+    body{
+        width: 90%;
+    }
+    .header{
+    padding: 1em 10em 0em;
+    }
+
+    h2 , .decouverte__coeur{
+        font-size: 20px;
+    }
 }

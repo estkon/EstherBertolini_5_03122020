@@ -21,3 +21,24 @@
 .orange{
 	color:$colour-primary;
 }
+ /*medias queries*/
+
+ @media only screen and (max-width: 320px) {
+
+}
+@media only screen and (min-width: 321px) and (max-width: 799px) {
+  /*style smartphones et petites tablettes en portrait*/
+
+}
+@media only screen and (min-width: 800px) and (max-width: 966px) {
+  /*style petites-moyennes tablettes */
+  p.violet, p.orange{
+	font-size: 20px;
+}
+}
+@media (min-width: 966px) {
+  /*style desktop */
+  p.violet, p.orange{
+	  font-size: 24px;
+  }
+}

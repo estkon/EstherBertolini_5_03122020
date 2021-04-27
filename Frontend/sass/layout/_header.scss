@@ -5,7 +5,6 @@ header{
 .header{
     display: flex;
     background-color: #f3e9f1;
-    padding: 8px 15px;
     justify-content: space-between;
     &__info--panier{
         display: flex;
@@ -54,9 +53,49 @@ button {
             text-transform: uppercase;
             color: white;
             font-weight: 600;
-            font-size: 13px;
             text-align: center;
             padding: 12px 0px;
         }
         }
-    
+
+        /*medias queries*/
+
+@media only screen and (max-width: 320px) {
+    /*style petits smartphones en voie de disparition*/
+    .header{
+         padding: 1em 1em 0em;
+        }
+    .header__logo--image img{
+            width: 90%;
+         }
+    h1{
+        font-size:15px;
+    }
+
+  }
+  @media only screen and (min-width: 321px) and (max-width: 799px) {
+    /*style smartphones et petites tablettes en portrait*/
+    .header{
+        padding: 1em 1em 0em;
+       }
+       .header__logo--image img{
+        width: 90%;
+       }
+        h1{
+            font-size:15px;
+        }
+
+  }
+  @media only screen and (min-width: 800px) and (max-width: 966px) {
+    /*style petites-moyennes tablettes */
+    .header {
+        padding: 1em 5em 0em;
+    }
+
+}
+  @media (min-width: 966px) {
+    /*style desktop */
+    .header{
+    padding: 1em 10em 0em;
+    }
+  }
