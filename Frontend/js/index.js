@@ -1,5 +1,4 @@
-function test2() {
-    let blocPage = document.getElementById("bloc-page");
-    let test = document.createElement("div");
-    test.setAttribute('class', 'rouge')
-    blocPage.appendChild(test);			}
+function produit() {
+    let blocPage = document.getElementsByClassName("ours");
+    let section = document.createElement("section");
+}
