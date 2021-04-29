@@ -1,26 +1,24 @@
-let main = document.getElementById("main");      //récupération de l'element id=main
-const section = document.createElement("section"); //création d'une section
-section.setAttribute('class',"ours");// ajout de la class ours à la section
+//Création de la section "ours"
+
+let cardTeddy = document.getElementById("main");      //récupération de l'element id=main
+const section = document.createElement("section"); //création d'une section (carte)
+cardTeddy.setAttribute('class',"ours");// ajout de la class ours à la section
 main.appendChild(section);           // cette section est un enfant de main => définir sa position html
 
+//Création de la div "ours__info" & "ours__texte--boutons"
 
-let ours = document.getElementsByClassName("ours");      //récupération de l'element class= ours
-const div = document.createElement("div");              //création d'une div
-div.section.setAttribute('class',"ours");                   // ajout de la class ours__info à la div
-ours.appendChild(div);           // cette div est un enfant de ours => définir sa position html
+let infoTeddy = document.createElement('div');
+let buttonTeddy = document.createElement('div');
+infoTeddy.setAttribute('class', 'ours__info');
+buttonTeddy.setAttribute('class', 'ours__texte--boutons');
+section.appendChild(infoTeddy);
+section.appendChild(buttonTeddy);
 
-// let cardMeuble = document.createElement("div");
-// cardMeuble.setAttribute('class', 'card col-md-5 p-2 m-2 col-xs-12');
-// document.getElementById("article").appendChild(cardMeuble);
+//Création de la div ours__img & ours__texte
 
-// // mise en place de l'image dans la carte
-// let imageCard = document.createElement('img');
-// cardMeuble.appendChild(imageCard);
-// imageCard.setAttribute('src', meuble.imageUrl);
-// imageCard.setAttribute('class', "card-img-top");
-// imageCard.setAttribute('alt', 'Une image de notre meuble');
-
-// // Mise en place du texte sous l'image dans la carte
-// let bodyCard = document.createElement('div');
-// cardMeuble.appendChild(bodyCard);
-// bodyCard.setAttribute('class','cord-body’);
+let imageTeddy = document.createElement('div');
+let textTeddy = document.createElement('div');
+imageTeddy.setAttribute('class', 'ours__img');
+textTeddy.setAttribute('class', 'ours__texte');
+infoTeddy.appendChild(imageTeddy);
+infoTeddy.appendChild(textTeddy);
