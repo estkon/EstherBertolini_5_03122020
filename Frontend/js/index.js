@@ -1,3 +1,25 @@
+// API
+function askTeddy() {
+    fetch("http://localhost:3000/api/teddies/")
+    .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then(function(value) {
+      document
+          .getElementsByTagName("h3")
+          .innerText = value.queryString.greetings;
+    })
+    .catch(function(err) {
+      // Une erreur est survenue
+    });
+  }
+  
+  document
+    .getElementById("askTeddy")
+
+
 //Création de la section "ours"
 
 let main = document.getElementById("main");      //récupération de l'element id=main

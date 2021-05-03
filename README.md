@@ -1,16 +1,9 @@
-# Orinoco #
+# Orinoco
+Il s'agit du serveur principal du projet 5 du chemin de développeur Web junior.
 
-This is the back end server for Project 5 of the Junior Web Developer path.
+# Conditions préalables
+Vous aurez besoin d'avoir Node et npminstallé localement sur votre machine.
 
-### Prerequisites ###
-
-You will need to have Node and `npm` installed locally on your machine.
-
-### Installation ###
-
-Clone this repo. From within the project folder, run `npm install`. You 
-can then run the server with `node server`. 
-The server should run on `localhost` with default port `3000`. If the
-server runs on another port for any reason, this is printed to the
-console when the server starts, e.g. `Listening on port 3001`.
-# EstherBertolin_P5_03122020
+# Installation
+Clonez ce dépôt. À partir du dossier du projet, exécutez npm install. Vous pouvez ensuite exécuter le serveur avec node server. Le serveur doit fonctionner localhostavec le port par défaut 3000. Si le serveur fonctionne sur un autre port pour une raison quelconque, cela est imprimé sur la console au démarrage du serveur, par exemple Listening on port 3001.
+# EstherBertolin_5_03122020
