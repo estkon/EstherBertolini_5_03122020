@@ -1,4 +1,8 @@
 {
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/estkon/EstherBertolini_5_03122020.git"
+  },
   "name": "estherbertolini_5_03122020",
   "version": "1.0.0",
   "description": "",
