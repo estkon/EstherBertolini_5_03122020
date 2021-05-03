@@ -1,24 +1,11 @@
 // API
-function askTeddy() {
     fetch("http://localhost:3000/api/teddies/")
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
+    .then(response => {
+        console.log("connexion réussie");
     })
-    .then(function(value) {
-      document
-          .getElementsByTagName("h3")
-          .innerText = value.queryString.greetings;
-    })
-    .catch(function(err) {
-      // Une erreur est survenue
+    .catch(err => {
+        console.log("erreur");
     });
-  }
-  
-  document
-    .getElementById("askTeddy")
-
 
 //Création de la section "ours"
 
@@ -51,7 +38,7 @@ let lienOurs = document.createElement('a');
 let imageDeOurs= document.createElement('img');
 imageTeddy.appendChild(lienOurs);
 lienOurs.appendChild(imageDeOurs);
-imageDeOurs.setAttribute('src', teddy.imageUrl);
+imageDeOurs.setAttribute('src', 'teddies.imageUrl');
 imageDeOurs.setAttribute('alt', 'Une image de notre ours');
 
 // Mise en place du texte dans la div ours__texte
