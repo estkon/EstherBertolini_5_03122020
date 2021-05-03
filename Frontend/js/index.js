@@ -25,12 +25,12 @@ infoTeddy.appendChild(textTeddy);
 
 // mise en place de l'image dans la div ours__img
 
-// let lienOurs = document.createElement('a');
-// let imageDeOurs= document.createElement('img');
-// imageTeddy.appendChild(lienOurs);
-// lienOurs.appendChild(imageDeOurs);
-// imageDeOurs.setAttribute('src', imageUrl);
-// imageDeOurs.setAttribute('alt', 'Une image de notre ours');
+let lienOurs = document.createElement('a');
+let imageDeOurs= document.createElement('img');
+imageTeddy.appendChild(lienOurs);
+lienOurs.appendChild(imageDeOurs);
+imageDeOurs.setAttribute('src', teddy.imageUrl);
+imageDeOurs.setAttribute('alt', 'Une image de notre ours');
 
 // Mise en place du texte dans la div ours__texte
 
