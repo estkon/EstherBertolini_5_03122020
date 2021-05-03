@@ -1,9 +1,14 @@
-// API
+// lien vers API
     fetch("http://localhost:3000/api/teddies/")
-    .then(response => {
-        console.log("connexion réussie");
+    .then(function(res) {
+        if (res.ok){
+            return res.json();
+        }
     })
-    .catch(err => {
+    .then (function(value){
+        console.log(value);
+    })
+    .catch(function (err) {
         console.log("erreur");
     });
 
@@ -38,7 +43,7 @@ let lienOurs = document.createElement('a');
 let imageDeOurs= document.createElement('img');
 imageTeddy.appendChild(lienOurs);
 lienOurs.appendChild(imageDeOurs);
-imageDeOurs.setAttribute('src', 'teddies.imageUrl');
+imageDeOurs.setAttribute('src', "teddies.imageUrl" );
 imageDeOurs.setAttribute('alt', 'Une image de notre ours');
 
 // Mise en place du texte dans la div ours__texte
@@ -51,3 +56,7 @@ priceCard.setAttribute('class', 'ours__texte--prix');
 textTeddy.appendChild(titleCard);
 textTeddy.appendChild(descriptionCard);
 textTeddy.appendChild(priceCard);
+
+//test name
+
+
