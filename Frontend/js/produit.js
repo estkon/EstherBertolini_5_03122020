@@ -5,7 +5,7 @@
     .then(res => res.json())
     .then (data => {
         data.forEach(ours =>{
-        content+= 
+        content= 
         ` <section class="ours">
         <div class="ours__info">
             <div class="ours__img">
