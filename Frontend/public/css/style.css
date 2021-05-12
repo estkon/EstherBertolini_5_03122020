@@ -173,7 +173,7 @@ button.connexion {
   display: flex;
   justify-content: space-around;
   width: 70%;
-  margin-left: 32%;
+  margin-left: 13%;
 }
 
 button, .deroulant {
@@ -410,6 +410,7 @@ footer {
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
+  border: 2px solid #6a5ca4;
 }
 .ours__texte {
   text-align: center;
