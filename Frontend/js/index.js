@@ -17,14 +17,14 @@ fetch("http://localhost:3000/api/teddies/")
                 /></a>
             </div>
             <div class="ours__texte">
-                <h3>Petit Ours Brun</h3>
+                <h3>${ours.name}</h3>
                 <p class="ours__texte--description">
                 ${ours.description}
                 </p>
                 <p class="ours__texte--prix">${ours.price} €</p>
                 <div class="ours__texte--boutons">
-                    <a href="../pages/panier.html/id=${ours._id}"> <button>L’adopter</button></a>
-                    <a href="../pages/produit.html/id=${ours._id}"><button>En savoir +</button></a>
+                <a href="../pages/panier.html/id=${ours._id}"> <button>L’adopter</button></a>
+                <a href="../pages/produit.html/id=${ours._id}"><button>En savoir +</button></a>
                 </div>
             </div>
 
