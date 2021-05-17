@@ -6,7 +6,7 @@ fetch("http://localhost:3000/api/teddies/")
 .then (data => {
     data.forEach(ours =>{
     content= 
-    ` <section class="contenu-panier">
+    ` <section class="mainPanier">
     <h3>1. Validation de votre panier</h3>
          <table>
                      <tr>
@@ -79,7 +79,13 @@ fetch("http://localhost:3000/api/teddies/")
                      <td colspan="2">48€ </td>
                  </tr>
          </table>
+         <div class="produit-adopter">
+         <a href="../pages/confirmation.html"> <button>Valider</button></a>
+         </div>
+     
  </section>
+
+
 
 `
 })
