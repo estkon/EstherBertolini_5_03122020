@@ -80,6 +80,11 @@ fetch("http://localhost:3000/api/teddies/")
                  </tr>
          </table>
  </section>
+ <section class="contenu-panier">
+    <div class="produit-adopter">
+    <a href="../pages/confirmation.html"> <button>Valider</button></a>
+    </div>
+</section>
 
 `
 })
