@@ -1,7 +1,7 @@
 .ours{
     padding: 10px;
     margin-bottom: 20px;
-    background-color: white;
+    background-color: $colour-back;
     border-radius: 1em;
     width: 90%;
     margin-right: auto;
@@ -17,7 +17,6 @@
             height: 100%;
             object-fit: cover;
             border-radius: 10px ;
-            border:2px solid $colour-secondary;
         }
     &__texte{
         text-align: center;
