@@ -23,7 +23,7 @@ fetch("http://localhost:3000/api/teddies/")
                 </p>
                 <p class="ours__texte--prix">${ours.price} €</p>
                 <div class="ours__texte--boutons">
-                <a href="../pages/produit.html/id=${ours._id}"><button>En savoir +</button></a>
+                <a href ="../pages/produit.html/id=${ours._id}">En savoir +</a>
                 </div>
             </div>
 
@@ -35,4 +35,3 @@ main.innerHTML = content
 
 })
 .catch(err => console.log(err));
-
