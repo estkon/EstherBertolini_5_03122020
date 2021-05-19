@@ -23,7 +23,7 @@ fetch("http://localhost:3000/api/teddies/")
                 </p>
                 <p class="ours__texte--prix">${ours.price} €</p>
                 <div class="ours__texte--boutons">
-                <a href ="../pages/produit.html?id=${ours._id[i]}">En savoir +</a>
+                <a href ="../pages/produit.html?id=${ours._id}">En savoir +</a>
                 </div>
             </div>
 
@@ -36,11 +36,4 @@ main.innerHTML = content
 })
 .catch(err => console.log(err));
 
-//test pour aller sur la page produit
-
-
- 
-
-//récupération de l'id du produit
-
-//mettre l'id du produit dans le localstorage et allervsur la page produit
+//fonction pour mettre les id des produits dans le localstorage
