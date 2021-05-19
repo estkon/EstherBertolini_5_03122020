@@ -176,13 +176,14 @@ button.connexion {
   margin-left: 13%;
 }
 
-select {
+select, .ours__texte--boutons a, .produit-adopter a {
   border-radius: 2em;
   padding: 2px 10px;
   font-size: 12px;
   background: #6a5ca4;
   color: white;
   font-weight: 600;
+  text-decoration: none;
 }
 
 option {
