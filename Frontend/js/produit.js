@@ -36,10 +36,10 @@ fetch(`http://localhost:3000/api/teddies/${id}`)
         </div>
     </div>
     <div class="ours__texte--boutons">
-        
+
               <select id="quantite">
               `
-      for (let i=1 ; i<5 ; i ++) {
+      for (let i=1 ; i<5 ; i ++) { //ajustement quantité
       content +=
       `
               <option value="${i}">${i}</option>
@@ -51,7 +51,7 @@ fetch(`http://localhost:3000/api/teddies/${id}`)
               
               <select id="colors">
     `
-      ours.colors.forEach(couleur => { 
+      ours.colors.forEach(couleur => { //cherche la couleur à afficher dans ours
       content +=
       `
               <option value="${couleur}">${couleur}</option>
@@ -71,11 +71,39 @@ fetch(`http://localhost:3000/api/teddies/${id}`)
         Convient aux enfants : dès la naissance.</p>
 </div>
  <div class="produit-adopter">
-    <a href="../pages/panier.html">L’adopter</a>
+    <a href="../pages/panier.html" id="adopter">L’adopter</a>
 </div>
 </section>
 `
 mainProduit.innerHTML = content
 
+//mise des données dans le localstorage au clique sur l'adopter
+let btnAdopter = document.getElementById('adopter'); //récup du boutton "l'adopter"
+console.log(btnAdopter);
+
+btnAdopter.addEventListener("click", () =>{   // écoute du clique sur "l'adopter"
+
+// récupération des données sur l'ours
+let name = document.querySelector("h3");
+let picture = document.getElementsByClassName("ours__img");
+let price = document.getElementsByClassName("ours__texte--prix");
+// let color = document.getElementById("colors");
+// let quantity = document.getElementById("quantite");
+
+
+
+ //stocker les données saisies dans le local storage
+
+ localStorage.setItem("name", `${ours.name}` );
+ localStorage.setItem("picture", `${ours.imageUrl}` );
+ localStorage.setItem("price", `${ours.price}` );
+//  localStorage.setItem("color", `${couleur}` );
+//  localStorage.setItem("quantity", `${i}` )
+
+
+
+});
+
 })
 .catch(err => console.log(err));
+
