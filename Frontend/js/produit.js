@@ -1,10 +1,21 @@
+// //récupération de la chaine de requête dans l'url
+const queryString_url_id = window.location.search;
+
+// // méthode 1 supprimer "?" pour récupérer uniquement id
+// const monId = queryString_url_id.slice(1);
+// console.log(monId)
+
+// méthode 2 pour récupérer uniquement id
+const urlSearchParams = new URLSearchParams(queryString_url_id);
+const id = urlSearchParams.get("id")
+
+
 // lien vers API
 let content = ''
 let main = document.getElementById("mainProduit");  
-fetch("http://localhost:3000/api/teddies/")
+fetch(`http://localhost:3000/api/teddies/${id}`)
 .then(res => res.json())
-.then (data => {
-    data.forEach(ours =>{
+.then (ours =>{
     content= 
     ` <section class="ours">
     <div class="ours__info">
@@ -26,24 +37,29 @@ fetch("http://localhost:3000/api/teddies/")
     </div>
     <div class="ours__texte--boutons">
         
-            <ul>
-              <li class="deroulant"><a href="#"><p>Quantité: 0 </p></a>
-                <ul class="sous">
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                </ul>
-              </li>
-              <li class="deroulant"><a href="#"><p>Couleur</p></a>
-                <ul class="sous">
-                  <li><a href="#">${ours.colors[0]}</a></li>
-                  <li><a href="#">${ours.colors[1]}</a></li>
-                  <li><a href="#">${ours.colors[2]}</a></li>
-                </ul>
-              </li>
-            </ul>
+              <select id="quantite">
+              `
+      for (let i=1 ; i<5 ; i ++) {
+      content +=
+      `
+              <option value="${i}">${i}</option>
+
+      `
+      };
           
+   content += ` </select>  
+              
+              <select id="colors">
+    `
+      ours.colors.forEach(couleur => { 
+      content +=
+      `
+              <option value="${couleur}">${couleur}</option>
+
+      `
+      });
           
+   content += ` </select>        
     </div>
 </div>
 <div class="fiche">
@@ -55,11 +71,10 @@ fetch("http://localhost:3000/api/teddies/")
         Convient aux enfants : dès la naissance.</p>
 </div>
  <div class="produit-adopter">
-    <a href="../pages/panier.html"> <button>L’adopter</button></a>
+    <a href="../pages/panier.html">L’adopter</a>
 </div>
 </section>
 `
-})
 mainProduit.innerHTML = content
 
 })

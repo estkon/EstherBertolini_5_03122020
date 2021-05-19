@@ -176,7 +176,7 @@ button.connexion {
   margin-left: 13%;
 }
 
-.ours__texte--boutons a, .deroulant {
+select {
   border-radius: 2em;
   padding: 2px 10px;
   font-size: 12px;
@@ -185,9 +185,8 @@ button.connexion {
   font-weight: 600;
 }
 
-.deroulant p {
-  margin: 0px;
-  padding: 0px 3px;
+option {
+  background-color: #d78232;
 }
 
 header {
