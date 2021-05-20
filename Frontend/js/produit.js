@@ -32,7 +32,7 @@ fetch(`http://localhost:3000/api/teddies/${id}`)
             <p class="ours__texte--description">
             ${ours.description}
             </p>
-            <p class="ours__texte--prix">${ours.price} €</p>
+            <p class="ours__texte--prix">${ours.price /100} €</p>
         </div>
     </div>
     <div class="ours__texte--boutons">
@@ -49,11 +49,11 @@ fetch(`http://localhost:3000/api/teddies/${id}`)
           
    content += ` </select>  
               
-              <select id="colors">
+              <select id="mySelectColor">
     `
       ours.colors.forEach(couleur => { //cherche la couleur à afficher dans ours
       content +=
-      `
+      `       
               <option value="${couleur}">${couleur}</option>
 
       `
@@ -87,18 +87,28 @@ btnAdopter.addEventListener("click", () =>{   // écoute du clique sur "l'adopte
 let name = document.querySelector("h3");
 let picture = document.getElementsByClassName("ours__img");
 let price = document.getElementsByClassName("ours__texte--prix");
-// let color = document.getElementById("colors");
-// let quantity = document.getElementById("quantite");
 
+// fonction couleur selectionnée
 
+function mySelectColor() {
+    // Add an event listener for the value
+    document.getElementById('mySelectColor').addEventListener('change', function() {
+      // Get the value of the name field.
+      var color = document.getElementById('mySelectColor').value;
+
+      // Save the name in localStorage.
+      localStorage.setItem("color", `${couleur}` );
+    });
+}
 
  //stocker les données saisies dans le local storage
 
  localStorage.setItem("name", `${ours.name}` );
  localStorage.setItem("picture", `${ours.imageUrl}` );
  localStorage.setItem("price", `${ours.price}` );
-//  localStorage.setItem("color", `${couleur}` );
-//  localStorage.setItem("quantity", `${i}` )
+ 
+
+
 
 
 
