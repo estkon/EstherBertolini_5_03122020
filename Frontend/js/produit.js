@@ -93,6 +93,7 @@ console.log(btn_adopter);
 btn_adopter.addEventListener("click",(event)=> {
 event.preventDefault();
 
+
 //mettre le choix de l'utilisateur dans une variable
 const choixCouleur = idColor.value;
 const choixQuantite = idQuantity.value;
@@ -118,20 +119,34 @@ console.log(optionsProduit);
 let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
 console.log(produitEnregistreDansLocalstorage);
 
-//Si il y a des produits déjà enregistrés dans le localstorage
-if(produitEnregistreDansLocalstorage){
+//fonction fenêtre popup
+const popoupConfirmation = () =>{
+    if(window.confirm(`${ours.name} couleur:${choixCouleur} quantité:${choixQuantite} ajouté au panier
+consulter le panier OK ou revenir à la page d'accueil ANNULER`)){
+        window.location.href ="panier.html";
+
+    }else{
+        window.location.href ="index.html";
+
+    }
+}
+//fonction ajouter un produit selectionné dans le localStorage
+const ajoutProduitLocalStorage = () =>{
     produitEnregistreDansLocalstorage.push(optionsProduit);
     localStorage.setItem("produit",JSON.stringify(produitEnregistreDansLocalstorage));
+}
 
-    console.log(produitEnregistreDansLocalstorage);
+//Si il y a des produits déjà enregistrés dans le localstorage
+if(produitEnregistreDansLocalstorage){
+    ajoutProduitLocalStorage();
+    popoupConfirmation();
 }
  //Si il n'y a pas de produits déjà enregistrés dans le localstorage
 else{
     produitEnregistreDansLocalstorage = [] ;
-    produitEnregistreDansLocalstorage.push(optionsProduit);
-    localStorage.setItem("produit",JSON.stringify(produitEnregistreDansLocalstorage));
-
-    console.log(produitEnregistreDansLocalstorage);
+    ajoutProduitLocalStorage();
+    popoupConfirmation();
+    
 }
 });
 
