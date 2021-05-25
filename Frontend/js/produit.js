@@ -97,8 +97,6 @@ event.preventDefault();
 const choixCouleur = idColor.value;
 const choixQuantite = idQuantity.value;
 
-console.log(choixCouleur);
-console.log(choixQuantite);
 
 //récupération des valeurs du formulaire
 
@@ -108,9 +106,8 @@ let optionsProduit ={
     optionCouleur : choixCouleur ,
     optionQuantite : choixQuantite ,
     price : ours.price / 100 ,
-}
+};
 console.log(optionsProduit);
-
 
 
 // ---------------------le local Storage---------------------------------------
@@ -118,20 +115,24 @@ console.log(optionsProduit);
 
 // déclaration de la variable "produitEnregistreDansLocalstorage" contient les keys et values du localstorage
 // JSON.parse = conversion des données (JSON) du localstorage en objet JS
-let produitEnregistreDansLocalstorage = localStorage.getItem("produit");
+let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
 console.log(produitEnregistreDansLocalstorage);
 
-// //Si il y a des produits déjà enregistrés dans le localstorage
-// if(produitEnregistreDansLocalstorage){
+//Si il y a des produits déjà enregistrés dans le localstorage
+if(produitEnregistreDansLocalstorage){
+    produitEnregistreDansLocalstorage.push(optionsProduit);
+    localStorage.setItem("produit",JSON.stringify(produitEnregistreDansLocalstorage));
 
-// }
-// //Si il n'y a pas de produits déjà enregistrés dans le localstorage
-// else{
-//     produitEnregisteDansLocalstorage = [];
-    
+    console.log(produitEnregistreDansLocalstorage);
+}
+ //Si il n'y a pas de produits déjà enregistrés dans le localstorage
+else{
+    produitEnregistreDansLocalstorage = [] ;
+    produitEnregistreDansLocalstorage.push(optionsProduit);
+    localStorage.setItem("produit",JSON.stringify(produitEnregistreDansLocalstorage));
 
-//     console.log(produitEnregistreDansLocalstorage);
-// }
+    console.log(produitEnregistreDansLocalstorage);
+}
 });
 
 
