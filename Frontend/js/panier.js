@@ -36,7 +36,7 @@ positionElement.innerHTML = panierVide ;
 
   //mise en place de la boucle
   for (k = 0; k < produitEnregistreDansLocalstorage.length; k ++ ){
- //prix en fonction de la quantité
+       //prix en fonction de la quantité
  let prixQuantite = `${produitEnregistreDansLocalstorage[k].price}`*`${produitEnregistreDansLocalstorage[k].optionQuantite}`;
 
   structureProduitPanier = structureProduitPanier +
@@ -53,12 +53,15 @@ positionElement.innerHTML = panierVide ;
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
                          <td>${prixQuantite} €</td>
                          <td><i class="fas fa-times-circle"></i></td>
-                     </tr>         
-                     </tbody>   
-            </table>  
+                     </tr>          
   
   ` ;
 }
+
+structureProduitPanier += `                    
+ </tbody>   
+</table> 
+`
 
 
 if ( k === produitEnregistreDansLocalstorage.length){
