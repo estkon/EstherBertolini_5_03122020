@@ -28,26 +28,30 @@ positionElement.innerHTML = panierVide ;
                   <th>Prix unitaire</th>
                   <th>Total</th>
                   <th>Retirer</th>
-              <tr>
+              
                 
     
   ` ;
- 
+
+
   //mise en place de la boucle
   for (k = 0; k < produitEnregistreDansLocalstorage.length; k ++ ){
+ //prix en fonction de la quantité
+ let prixQuantite = `${produitEnregistreDansLocalstorage[k].price}`*`${produitEnregistreDansLocalstorage[k].optionQuantite}`;
 
   structureProduitPanier = structureProduitPanier +
   `                 
-                     <td >
-                                     <div class="contenu-panier__text">
-                                         <p class="contenu-panier__text--nom">${produitEnregistreDansLocalstorage[k].name}</p>
-                                          <p class="contenu-panier__text--color">${produitEnregistreDansLocalstorage[k].optionCouleur}</p>
-                                         <p class="contenu-panier__text--ref">ref=${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}</p>
-                                     </div>
+                    <tr>
+                         <td >
+                            <div class="contenu-panier__text">
+                                 <p class="contenu-panier__text--nom">${produitEnregistreDansLocalstorage[k].name}</p>
+                                 <p class="contenu-panier__text--color">${produitEnregistreDansLocalstorage[k].optionCouleur}</p>
+                                 <p class="contenu-panier__text--ref">ref=${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}</p>
+                             </div>
                          </td>
                          <td>${produitEnregistreDansLocalstorage[k].optionQuantite}</td>
-                         <td>${produitEnregistreDansLocalstorage[k].price /100} €</td>
-                         <td>${produitEnregistreDansLocalstorage[k].price /100}*${produitEnregistreDansLocalstorage[k].optionQuantite} €</td>
+                         <td>${produitEnregistreDansLocalstorage[k].price} €</td>
+                         <td>${prixQuantite} €</td>
                          <td><i class="fas fa-times-circle"></i></td>
                      </tr>         
                      </tbody>   
