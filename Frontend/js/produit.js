@@ -117,7 +117,6 @@ console.log(optionsProduit);
 // déclaration de la variable "produitEnregistreDansLocalstorage" contient les keys et values du localstorage
 // JSON.parse = conversion des données (JSON) du localstorage en objet JS
 let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
-console.log(produitEnregistreDansLocalstorage);
 
 //fonction fenêtre popup
 const popoupConfirmation = () =>{

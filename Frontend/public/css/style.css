@@ -490,6 +490,15 @@ th {
   margin-left: 5px;
 }
 
+.panier-vide {
+  min-height: 500px;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 /*medias queries*/
 @media only screen and (min-width: 321px) and (max-width: 799px) {
   /*style smartphones et petites tablettes en portrait*/
