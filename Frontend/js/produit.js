@@ -36,16 +36,14 @@ fetch(`http://localhost:3000/api/teddies/${idProduitSelectionner}`)
         </div>
     </div>
     <div class="ours__texte--boutons">
-              <select id="optionQuantite">
+              <div id="optionQuantite">
+              <button class="operateur"><i class="fas fa-plus-circle"></i></button>
+              <div class= valueQuantite>1</div>
+              <button  class="operateur"><i class="fas fa-minus-circle"></i></button>
               `
-      for (let i=1 ; i<5 ; i ++) { //ajustement quantité
-      content +=
-      `
-              <option value="${i}">${i}</option>
-      `
-      };
+      ;
           
-   content += ` </select>  
+   content += ` </div>  
               
               <select id="optionCouleur">
     `

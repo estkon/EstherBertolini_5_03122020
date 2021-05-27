@@ -176,7 +176,7 @@ button.connexion {
   margin-left: 13%;
 }
 
-select, .ours__texte--boutons a, .produit-adopter a {
+select, .ours__texte--boutons a, .produit-adopter a, #optionQuantite {
   border-radius: 2em;
   padding: 2px 10px;
   font-size: 12px;
@@ -188,6 +188,28 @@ select, .ours__texte--boutons a, .produit-adopter a {
 
 option {
   background-color: #d78232;
+}
+
+#optionQuantite {
+  display: flex;
+  justify-content: space-around;
+  color: white;
+}
+
+.valueQuantite {
+  padding: 5px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+i.fas {
+  color: white;
+  background-color: #6a5ca4;
+  font-size: 15px;
+}
+
+.operateur {
+  background-color: #6a5ca4;
 }
 
 header {
