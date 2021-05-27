@@ -37,9 +37,9 @@ fetch(`http://localhost:3000/api/teddies/${idProduitSelectionner}`)
     </div>
     <div class="ours__texte--boutons">
               <div id="optionQuantite">
-              <button id="btnMore"><i class="fas fa-plus-circle"></i></button>
+              <button id="btnMore"><i class="i-operator" class="fas fa-plus-circle"></i></button>
               <div id= valueQuantity>0</div>
-              <button  id="btnLess"><i class="fas fa-minus-circle"></i></button>
+              <button  id="btnLess"><i class="i-operator" class="fas fa-minus-circle"></i></button>
               `
       ;
 
@@ -120,7 +120,7 @@ event.preventDefault();
 
 //mettre le choix de l'utilisateur dans une variable
 const choixCouleur = idColor.value;
-const choixQuantite = idQuantity.value;
+const choixQuantite = $valueQuantity.innerHTML;
 
 
 //récupération des valeurs du formulaire
