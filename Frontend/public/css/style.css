@@ -208,8 +208,9 @@ i.fas {
   font-size: 15px;
 }
 
-.operateur {
+#btnLess, #btnMore {
   background-color: #6a5ca4;
+  padding: 0px 6px;
 }
 
 header {

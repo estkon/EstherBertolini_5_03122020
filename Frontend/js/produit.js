@@ -37,12 +37,13 @@ fetch(`http://localhost:3000/api/teddies/${idProduitSelectionner}`)
     </div>
     <div class="ours__texte--boutons">
               <div id="optionQuantite">
-              <button class="operateur"><i class="fas fa-plus-circle"></i></button>
-              <div class= valueQuantite>1</div>
-              <button  class="operateur"><i class="fas fa-minus-circle"></i></button>
+              <button id="btnMore"><i class="fas fa-plus-circle"></i></button>
+              <div id= valueQuantity>0</div>
+              <button  id="btnLess"><i class="fas fa-minus-circle"></i></button>
               `
       ;
-          
+
+
    content += ` </div>  
               
               <select id="optionCouleur">
@@ -72,6 +73,30 @@ fetch(`http://localhost:3000/api/teddies/${idProduitSelectionner}`)
 `
 mainProduit.innerHTML = content
 
+////-------------------------------BOUTONS + et - -----------------------------
+//   Les boutons + et -
+const btn_plus = document.querySelector("#btnMore");
+const btn_moins = document.querySelector("#btnLess");
+var $valueQuantity = document.querySelector("#valueQuantity");
+
+ console.log(btn_plus);
+ console.log(btn_moins);
+ console.log(valueQuantity);
+
+ //Ecouter le bouton +
+btn_plus.addEventListener("click",(event)=>{
+    $valueQuantity.innerHTML = parseInt($valueQuantity.innerHTML) + 1
+});
+
+ //Ecouter le bouton -
+ btn_moins.addEventListener("click",(event)=>{
+    var $valueQuantity = document.querySelector("#valueQuantity");
+    if(parseInt($valueQuantity.innerHTML) > 0 ) {
+    $valueQuantity.innerHTML = parseInt($valueQuantity.innerHTML) - 1
+}
+
+});
+ 
 
 
 // ---------------------la gestion du panier---------------------------------------
@@ -81,11 +106,12 @@ mainProduit.innerHTML = content
 const idColor = document.querySelector("#optionCouleur")
 const idQuantity = document.querySelector("#optionQuantite")
 
-
+//----------------------------ADOPTER--------------------------------------------
 // Selection du bouton l'adopter
 const btn_adopter = document.querySelector("#btn_adopter");
 
 console.log(btn_adopter);
+
 
 //Ecouter le bouton et envoyer le panier
 btn_adopter.addEventListener("click",(event)=> {
@@ -145,6 +171,7 @@ else{
     popoupConfirmation();
     
 }
+
 });
 
 
