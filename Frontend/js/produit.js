@@ -37,9 +37,9 @@ fetch(`http://localhost:3000/api/teddies/${idProduitSelectionner}`)
     </div>
     <div class="ours__texte--boutons">
               <div id="optionQuantite">
-              <button id="btnMore"><i class="i-operator" class="fas fa-plus-circle"></i></button>
-              <div id= valueQuantity>0</div>
-              <button  id="btnLess"><i class="i-operator" class="fas fa-minus-circle"></i></button>
+              <button id="btnMore"><i class="fas fa-plus-circle"></i></button>
+              <div id= valueQuantity>1</div>
+              <button  id="btnLess"><i class="fas fa-minus-circle"></i></button>
               `
       ;
 
@@ -91,7 +91,7 @@ btn_plus.addEventListener("click",(event)=>{
  //Ecouter le bouton -
  btn_moins.addEventListener("click",(event)=>{
     var $valueQuantity = document.querySelector("#valueQuantity");
-    if(parseInt($valueQuantity.innerHTML) > 0 ) {
+    if(parseInt($valueQuantity.innerHTML) > 1 ) {
     $valueQuantity.innerHTML = parseInt($valueQuantity.innerHTML) - 1
 }
 
