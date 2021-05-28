@@ -88,7 +88,7 @@ const btn_moins = document.querySelectorAll(".btnLess");
  console.log(btn_moins);
 //  console.log(valueQuantity);
 
- //Ecouter le bouton +
+ //Ecouter les boutons +
 btn_plus.forEach(btn  => {
     btn.addEventListener("click", function(){
         console.log(this.dataset.id)
@@ -117,18 +117,31 @@ btn_plus.forEach(btn  => {
     
 
 
-//  //Ecouter le bouton -
-//  btn_moins.addEventListener("click",(event)=>{
-//     var $valueQuantity = document.querySelector("#valueQuantity");
-//     if(parseInt($valueQuantity.innerHTML) > 1 ) {
-//     $valueQuantity.innerHTML = parseInt($valueQuantity.innerHTML) - 1
-//         //envoie de la nouvelle valeur dans le localstorage
-//         var optionQuantite = document.getElementById('btnLess');
-//         optionQuantite.dataset.id  = $valueQuantity.innerHTML;
+//  //Ecouter les boutons -
+btn_moins.forEach(btn  => {
+    btn.addEventListener("click", function(){
+        console.log(this.dataset.id)
+        let idProduit=this.dataset.id ;
+        let nouveauTableau= [] ;
+        produitEnregistreDansLocalstorage.map(produit=>{
+            if(produit.id_ProduitSelectionner == idProduit) {
+                produit.optionQuantite-- // modification
+                nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
+            } else{
+                nouveauTableau.push(produit)
+            }
+            //donne l'index du produit et verifie si égal à celui du dernier produit du tableau:
+            if(produitEnregistreDansLocalstorage.indexOf(produit)== produitEnregistreDansLocalstorage.length-1) {
+                localStorage.setItem("produit",JSON.stringify(nouveauTableau));
+            }
 
-// }
+        })
 
-// });
+    let showQuantity = document.querySelector(".Quantity"+ idProduit) // recherche de l'élément html qui contient Quantity+id
+    showQuantity.innerHTML = showQuantity.innerHTML*1-1 ; // envoi dans html de la nouvelle valeur
+    })
+    
+})
     }
 
 //   //-------------------------------SUPPRESSION DES ARTICLES-----------------------------
