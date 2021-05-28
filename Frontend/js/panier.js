@@ -48,7 +48,13 @@ positionElement.innerHTML = panierVide ;
                                  <p class="contenu-panier__text--ref">ref=${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}</p>
                              </div>
                          </td>
-                         <td>${produitEnregistreDansLocalstorage[k].optionQuantite}</td>
+                         <td>
+                         <div id="optionQuantite">
+                            <button id="btnMore"><i class="fas fa-plus-circle"></i></button>
+                            <div id="valueQuantity">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
+                            <button  id="btnLess"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                         </td>
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
                          <td>${prixQuantite} €</td>
                          <td><button class="supprimer"><i class="fas fa-times-circle"></i></button></td>
