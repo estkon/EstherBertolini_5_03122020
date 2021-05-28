@@ -37,9 +37,9 @@ fetch(`http://localhost:3000/api/teddies/${idProduitSelectionner}`)
     </div>
     <div class="ours__texte--boutons">
               <div id="optionQuantite">
-              <button id="btnMore"><i class="fas fa-plus-circle"></i></button>
+              <button id="btnMore" data-id=&{produitEnregistreDansLocalstorage[k].id_produitEnregistreDansLocalstorage[k]}><i class="fas fa-plus-circle"></i></button>
               <div id="valueQuantity">1</div>
-              <button  id="btnLess"><i class="fas fa-minus-circle"></i></button>
+              <button  id="btnLess" data-id=&{produitEnregistreDansLocalstorage[k].id_produitEnregistreDansLocalstorage[k]}><i class="fas fa-minus-circle"></i></button>
               `
       ;
 
@@ -102,9 +102,9 @@ btn_plus.addEventListener("click",(event)=>{
 // ---------------------la gestion du panier---------------------------------------
 //--la récupération des données selctionnées par l'utilisateur et envoi du panier--
 
-// selection de l'id de la couleur et quantité
+// selection de l'id de la couleur
 const idColor = document.querySelector("#optionCouleur")
-const idQuantity = document.querySelector("#optionQuantite")
+
 
 //----------------------------ADOPTER--------------------------------------------
 // Selection du bouton l'adopter
