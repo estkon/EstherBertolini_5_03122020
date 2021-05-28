@@ -66,7 +66,6 @@ structureProduitPanier += `
 </tr>
 </table                  
  </section>   
-
 `
 
 
@@ -89,6 +88,4 @@ positionElement.innerHTML = structureProduitPanier ;
 //   })
 
 }
-
-
 
