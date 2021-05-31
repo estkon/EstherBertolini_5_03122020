@@ -2,21 +2,17 @@
 // JSON.parse = conversion des données (JSON) du localstorage en objet JS
 let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
 console.log(produitEnregistreDansLocalstorage);
-
 // ----------------------AFFICHAGE DES PRODUITS DU PANIER--------------------------------------------
 // selection de l'élément où sera injecter le code HTML
 const positionElement = document.querySelector("#mainPanier");
 console.log(positionElement);
-
 //si le panier est vide :afficher le panier est vide
 if(produitEnregistreDansLocalstorage === null){
 const panierVide = `
     <div class="panier-vide">
         <div> Oooooop's ! <br>Votre panier est vide ... </div> 
     </div>`;
-
 positionElement.innerHTML = panierVide ;
-
 }else{
 // si le panier n'est pas vide : afficher les produits du LocalStorage
   let structureProduitPanier = `
@@ -30,11 +26,8 @@ positionElement.innerHTML = panierVide ;
                   <th>Total</th>
                   <th>Retirer</th>   
   ` ;
-
-
   //mise en place de la boucle
   for (k = 0; k < produitEnregistreDansLocalstorage.length; k ++ ){
-
  //prix en fonction de la quantité
  let prixQuantite = `${produitEnregistreDansLocalstorage[k].price}`*`${produitEnregistreDansLocalstorage[k].optionQuantite}`;
  
@@ -50,9 +43,9 @@ positionElement.innerHTML = panierVide ;
                          </td>
                          <td>
                          <div id="optionQuantite">
-                            <button id="btnMore"><i class="fas fa-plus-circle"></i></button>
-                            <div id="valueQuantity">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
-                            <button  id="btnLess"><i class="fas fa-minus-circle"></i></button>
+                            <button  class="btnMore" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}"><i class="fas fa-plus-circle"></i></button>
+                            <div class="valueQuantity Quantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
+                            <button  class="btnLess" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}"><i class="fas fa-minus-circle"></i></button>
                         </div>
                          </td>
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
@@ -64,7 +57,6 @@ positionElement.innerHTML = panierVide ;
 }
 //prix total : addition des prixQuantite
 //création ici
-
 structureProduitPanier += ` 
 <tr>
 <td colspan="3" ><p class="total">Total des produits (TTC)</p</td>
@@ -73,47 +65,90 @@ structureProduitPanier += `
 </table                  
  </section>   
 `
-
-
 if ( k === produitEnregistreDansLocalstorage.length){
 //injection html dans le panier
 positionElement.innerHTML = structureProduitPanier ;
 ////-------------------------------BOUTONS + et - -----------------------------
 //   Les boutons + et -
-const btn_plus = document.querySelector("#btnMore");
-const btn_moins = document.querySelector("#btnLess");
-var $valueQuantity = document.querySelector("#valueQuantity");
-
+const btn_plus = document.querySelectorAll(".btnMore");
+const btn_moins = document.querySelectorAll(".btnLess");
+// var $valueQuantity = document.querySelector(".valueQuantity");
  console.log(btn_plus);
  console.log(btn_moins);
- console.log(valueQuantity);
+//  console.log(valueQuantity);
 
- //Ecouter le bouton +
-btn_plus.addEventListener("click",(event)=>{
-    $valueQuantity.innerHTML = parseInt($valueQuantity.innerHTML) + 1
-});
+ //Ecouter les boutons +
+btn_plus.forEach(btn  => {
+    btn.addEventListener("click", function(){
+        console.log(this.dataset.id)
+        let idProduit=this.dataset.id ;
+        let nouveauTableau= [] ;
+        produitEnregistreDansLocalstorage.map(produit=>{
+            if(produit.id_ProduitSelectionner == idProduit) {
+                produit.optionQuantite++ // modification
+                nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
+            } else{
+                nouveauTableau.push(produit)
+            }
+            //donne l'index du produit et verifie si égal à celui du dernier produit du tableau:
+            if(produitEnregistreDansLocalstorage.indexOf(produit)== produitEnregistreDansLocalstorage.length-1) {
+                localStorage.setItem("produit",JSON.stringify(nouveauTableau));
+            }
+        })
+    let showQuantity = document.querySelector(".Quantity"+ idProduit) // recherche de l'élément html qui contient Quantity+id
+    showQuantity.innerHTML = showQuantity.innerHTML*1+1 ; // envoi dans html de la nouvelle valeur
+    })
 
- //Ecouter le bouton -
- btn_moins.addEventListener("click",(event)=>{
-    var $valueQuantity = document.querySelector("#valueQuantity");
-    if(parseInt($valueQuantity.innerHTML) > 1 ) {
-    $valueQuantity.innerHTML = parseInt($valueQuantity.innerHTML) - 1
-}
+  
+})
 
-});
+
+
+//  //Ecouter les boutons -
+btn_moins.forEach(btn  => {
+    btn.addEventListener("click", function(){
+        console.log(this.dataset.id)
+        let idProduit=this.dataset.id ;
+        let nouveauTableau= [] ;
+        produitEnregistreDansLocalstorage.map(produit=>{
+            if(produit.id_ProduitSelectionner == idProduit) {
+                produit.optionQuantite-- // modification
+                nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
+            } else{
+                nouveauTableau.push(produit)
+            }
+            //donne l'index du produit et verifie si égal à celui du dernier produit du tableau:
+            if(produitEnregistreDansLocalstorage.indexOf(produit)== produitEnregistreDansLocalstorage.length-1) {
+                localStorage.setItem("produit",JSON.stringify(nouveauTableau));
+            }
+
+        })
+
+    let showQuantity = document.querySelector(".Quantity"+ idProduit) // recherche de l'élément html qui contient Quantity+id
+    showQuantity.innerHTML = showQuantity.innerHTML*1-1 ; // envoi dans html de la nouvelle valeur
+    })
+
+})
     }
 
 //   //-------------------------------SUPPRESSION DES ARTICLES-----------------------------
+
+    
+          
+            
+    
+
+          
+    
+    
+  
 //  // Btn supprimer article //
 //  const deleteItem = document.querySelectorAll(".supprimer");
 //  console.log(deleteItem);
-
 //  //ecoute des boutons supprimer
 //  deleteItem.addEventListener("click",(event) =>{
 //  event.preventDefault() ; 
-
 // // selection de l'id du produit qui sera supprimer au clic sur le bouton
 //  let suppressionIdSelected = produitEnregistreDansLocalstorage[k].id_ProduitSelectionner;
 //   })
-
 }
