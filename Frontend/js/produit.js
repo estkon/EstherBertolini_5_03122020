@@ -37,9 +37,9 @@ fetch(`http://localhost:3000/api/teddies/${idProduitSelectionner}`)
     </div>
     <div class="ours__texte--boutons">
               <div id="optionQuantite">
-              <button id="btnMore"><i class="fas fa-plus-circle"></i></button>
+              <button id="btnMore" data-id=&{produitEnregistreDansLocalstorage[k].id_produitEnregistreDansLocalstorage[k]}><i class="fas fa-plus-circle"></i></button>
               <div id="valueQuantity">1</div>
-              <button  id="btnLess"><i class="fas fa-minus-circle"></i></button>
+              <button  id="btnLess" data-id=&{produitEnregistreDansLocalstorage[k].id_produitEnregistreDansLocalstorage[k]}><i class="fas fa-minus-circle"></i></button>
               `
       ;
 
@@ -102,9 +102,9 @@ btn_plus.addEventListener("click",(event)=>{
 // ---------------------la gestion du panier---------------------------------------
 //--la récupération des données selctionnées par l'utilisateur et envoi du panier--
 
-// selection de l'id de la couleur et quantité
+// selection de l'id de la couleur
 const idColor = document.querySelector("#optionCouleur")
-const idQuantity = document.querySelector("#optionQuantite")
+
 
 //----------------------------ADOPTER--------------------------------------------
 // Selection du bouton l'adopter
@@ -120,7 +120,7 @@ event.preventDefault();
 
 //mettre le choix de l'utilisateur dans une variable
 const choixCouleur = idColor.value;
-const choixQuantite = $valueQuantity.innerHTML;
+const choixQuantite =parseInt ($valueQuantity.innerHTML);
 console.log(choixQuantite);
 
 
@@ -130,7 +130,7 @@ let optionsProduit ={
     name: ours.name ,
     id_ProduitSelectionner : ours._id ,
     optionCouleur : choixCouleur ,
-    optionQuantite : choixQuantite ,
+    optionQuantite :  choixQuantite,
     price : ours.price / 100 ,
 };
 console.log(optionsProduit);
@@ -156,9 +156,38 @@ consulter le panier OK ou revenir à la page d'accueil ANNULER`)){
 }
 //fonction ajouter un produit selectionné dans le localStorage
 const ajoutProduitLocalStorage = () =>{
-    produitEnregistreDansLocalstorage.push(optionsProduit);
-    localStorage.setItem("produit",JSON.stringify(produitEnregistreDansLocalstorage));
-}
+
+    //fonction produit+couleur existant, vérifie si existe déjà dans localStorage
+    let produitCouleurExistant = produitEnregistreDansLocalstorage.find(produit =>produit.id_ProduitSelectionner  === optionsProduit.id_ProduitSelectionner && produit.optionCouleur  === optionsProduit.optionCouleur)
+    // Si le produit existe alors on le modifie avec map
+    if(produitCouleurExistant){
+        let nouveauStorage = [];
+        produitEnregistreDansLocalstorage.map(produit =>{
+            if(produit.id_ProduitSelectionner  === optionsProduit.id_ProduitSelectionner && produit.optionCouleur  === optionsProduit.optionCouleur ){
+             //ajout nouvelle quantité à l'existante:
+             produit.optionQuantite = parseInt(produit.optionQuantite)
+             console.log(produit.optionQuantite+optionsProduit.optionQuantite)
+             produit.optionQuantite = optionsProduit.optionQuantite + produit.optionQuantite
+             nouveauStorage.push(produit)
+            
+            } else {
+                nouveauStorage.push(produit)
+            } 
+        
+            //Envoi du produit modifié dans localStorage
+                localStorage.setItem("produit",JSON.stringify(nouveauStorage)); 
+                
+    
+            }) 
+        
+
+            //si le produit n'existe pas 
+
+        } else{
+        produitEnregistreDansLocalstorage.push(optionsProduit);
+    	localStorage.setItem("produit",JSON.stringify(produitEnregistreDansLocalstorage));
+	}
+};
 
 //Si il y a des produits déjà enregistrés dans le localstorage
 if(produitEnregistreDansLocalstorage){
