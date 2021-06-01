@@ -109,10 +109,12 @@ btn_plus.forEach(btn  => {
 btn_moins.forEach(btn  => {
     btn.addEventListener("click", function(){
         console.log(this.dataset.id)
+        console.log(this.dataset.color)
+        let colorProduit= this.dataset.color ;
         let idProduit=this.dataset.id ;
         let nouveauTableau= [] ;
         produitEnregistreDansLocalstorage.map(produit=>{
-            if(produit.id_ProduitSelectionner == idProduit) {
+            if(produit.id_ProduitSelectionner == idProduit && produit.optionCouleur == colorProduit) {
                 produit.optionQuantite-- // modification
                 nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
             } else{
@@ -125,7 +127,7 @@ btn_moins.forEach(btn  => {
 
         })
 
-    let showQuantity = document.querySelector(".Quantity"+ idProduit) // recherche de l'élément html qui contient Quantity+id
+    let showQuantity = document.querySelector(".Quantity"+ idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
     showQuantity.innerHTML = showQuantity.innerHTML*1-1 ; // envoi dans html de la nouvelle valeur
     })
 
