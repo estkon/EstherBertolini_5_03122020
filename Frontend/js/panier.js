@@ -51,7 +51,8 @@ positionElement.innerHTML = panierVide ;
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
                          <td>${prixQuantite} €</td>
                          <td><button class="supprimer"><i class="fas fa-times-circle"></i></button></td>
-                     </tr>          
+                     </tr>  
+                         
   
   ` ;
 }
@@ -61,8 +62,13 @@ structureProduitPanier += `
 <td colspan="3" ><p class="total">Total des produits (TTC)</p</td>
 <td colspan="2">48€ </td>
 </tr>
-</table                  
- </section>   
+<tr> 
+<td colspan="5"><button class="btn_vider_panier"> Vider le panier </button> <td> </tr>  
+</table>    
+           
+ </section> 
+
+
 `
 if ( k === produitEnregistreDansLocalstorage.length){
 //injection html dans le panier
@@ -157,3 +163,21 @@ for (let l = 0 ; l < btn_supprimer.length; l++){
     })
 
 }
+
+// //-------------------Mise en fonction du bouton vider-panier--------------------------------
+// selection du bouton  class="btn_vider_panier"
+const btn_vider_panier = document.querySelector(".btn_vider_panier") ;
+console.log(btn_vider_panier);
+
+//suppression de la key produit du local storage
+btn_vider_panier.addEventListener("click", (event) => {
+    event.preventDefault();
+    //.removeItem pour vider le local storage
+    localStorage.removeItem("produit") ;
+    //alerte :panier supprimé
+    alert("Tous vos produits ont été supprimé du panier")
+    //reactualisation de la page
+    window.location.href ="panier.html"
+
+
+})
