@@ -44,8 +44,8 @@ positionElement.innerHTML = panierVide ;
                          <td>
                          <div id="optionQuantite">
                             <button  class="btnMore" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur}"><i class="fas fa-plus-circle"></i></button>
-                            <div class="valueQuantity Quantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
-                            <button  class="btnLess" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner} data-color="${produitEnregistreDansLocalstorage[k].optionCouleur}"><i class="fas fa-minus-circle"></i></button>
+                            <div class="valueQuantity Quantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}${produitEnregistreDansLocalstorage[k].optionCouleur}">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
+                            <button  class="btnLess" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur}"><i class="fas fa-minus-circle"></i></button>
                         </div>
                          </td>
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
@@ -96,7 +96,7 @@ btn_plus.forEach(btn  => {
                 localStorage.setItem("produit",JSON.stringify(nouveauTableau));
             }
         })
-    let showQuantity = document.querySelector(".Quantity"+ idProduit) // recherche de l'élément html qui contient Quantity+id
+    let showQuantity = document.querySelector(".Quantity"+ idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
     showQuantity.innerHTML = showQuantity.innerHTML*1+1 ; // envoi dans html de la nouvelle valeur
     })
 
