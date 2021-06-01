@@ -104,7 +104,11 @@ btn_plus.forEach(btn  => {
         })
     let showQuantity = document.querySelector(".Quantity"+ idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
     showQuantity.innerHTML = showQuantity.innerHTML*1+1 ; // envoi dans html de la nouvelle valeur
+    //rechargement de la page 
+    window.location.href ="panier.html";
+    
     })
+    
 
   
 })
@@ -135,8 +139,10 @@ btn_moins.forEach(btn  => {
 
     let showQuantity = document.querySelector(".Quantity"+ idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
     showQuantity.innerHTML = showQuantity.innerHTML*1-1 ; // envoi dans html de la nouvelle valeur
+        //rechargement de la page
+        window.location.href ="panier.html";
     })
-
+            
 })
     }}
 
