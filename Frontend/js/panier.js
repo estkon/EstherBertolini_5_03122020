@@ -43,9 +43,9 @@ positionElement.innerHTML = panierVide ;
                          </td>
                          <td>
                          <div id="optionQuantite">
-                            <button  class="btnMore" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}"><i class="fas fa-plus-circle"></i></button>
-                            <div class="valueQuantity Quantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
-                            <button  class="btnLess" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}"><i class="fas fa-minus-circle"></i></button>
+                            <button  class="btnMore" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur}"><i class="fas fa-plus-circle"></i></button>
+                            <div class="valueQuantity Quantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}${produitEnregistreDansLocalstorage[k].optionCouleur}">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
+                            <button  class="btnLess" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur}"><i class="fas fa-minus-circle"></i></button>
                         </div>
                          </td>
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
@@ -55,8 +55,7 @@ positionElement.innerHTML = panierVide ;
   
   ` ;
 }
-//prix total : addition des prixQuantite
-//création ici
+
 structureProduitPanier += ` 
 <tr>
 <td colspan="3" ><p class="total">Total des produits (TTC)</p</td>
@@ -72,19 +71,21 @@ positionElement.innerHTML = structureProduitPanier ;
 //   Les boutons + et -
 const btn_plus = document.querySelectorAll(".btnMore");
 const btn_moins = document.querySelectorAll(".btnLess");
-// var $valueQuantity = document.querySelector(".valueQuantity");
+
  console.log(btn_plus);
  console.log(btn_moins);
-//  console.log(valueQuantity);
+
 
  //Ecouter les boutons +
 btn_plus.forEach(btn  => {
     btn.addEventListener("click", function(){
         console.log(this.dataset.id)
+        console.log(this.dataset.color)
+        let colorProduit= this.dataset.color ;
         let idProduit=this.dataset.id ;
         let nouveauTableau= [] ;
         produitEnregistreDansLocalstorage.map(produit=>{
-            if(produit.id_ProduitSelectionner == idProduit) {
+            if(produit.id_ProduitSelectionner == idProduit && produit.optionCouleur == colorProduit) {
                 produit.optionQuantite++ // modification
                 nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
             } else{
@@ -95,7 +96,7 @@ btn_plus.forEach(btn  => {
                 localStorage.setItem("produit",JSON.stringify(nouveauTableau));
             }
         })
-    let showQuantity = document.querySelector(".Quantity"+ idProduit) // recherche de l'élément html qui contient Quantity+id
+    let showQuantity = document.querySelector(".Quantity"+ idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
     showQuantity.innerHTML = showQuantity.innerHTML*1+1 ; // envoi dans html de la nouvelle valeur
     })
 
@@ -108,10 +109,12 @@ btn_plus.forEach(btn  => {
 btn_moins.forEach(btn  => {
     btn.addEventListener("click", function(){
         console.log(this.dataset.id)
+        console.log(this.dataset.color)
+        let colorProduit= this.dataset.color ;
         let idProduit=this.dataset.id ;
         let nouveauTableau= [] ;
         produitEnregistreDansLocalstorage.map(produit=>{
-            if(produit.id_ProduitSelectionner == idProduit) {
+            if(produit.id_ProduitSelectionner == idProduit && produit.optionCouleur == colorProduit) {
                 produit.optionQuantite-- // modification
                 nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
             } else{
@@ -124,7 +127,7 @@ btn_moins.forEach(btn  => {
 
         })
 
-    let showQuantity = document.querySelector(".Quantity"+ idProduit) // recherche de l'élément html qui contient Quantity+id
+    let showQuantity = document.querySelector(".Quantity"+ idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
     showQuantity.innerHTML = showQuantity.innerHTML*1-1 ; // envoi dans html de la nouvelle valeur
     })
 
