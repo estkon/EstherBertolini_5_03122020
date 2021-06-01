@@ -7,7 +7,7 @@ console.log(produitEnregistreDansLocalstorage);
 const positionElement = document.querySelector("#mainPanier");
 console.log(positionElement);
 //si le panier est vide :afficher le panier est vide
-if(produitEnregistreDansLocalstorage === null){
+if(produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstorage == 0){ 
 const panierVide = `
     <div class="panier-vide">
         <div> Oooooop's ! <br>Votre panier est vide ... </div> 
@@ -132,26 +132,28 @@ btn_moins.forEach(btn  => {
     })
 
 })
-    }
+    }}
 
-//   //-------------------------------SUPPRESSION DES ARTICLES-----------------------------
+// -----------------------------suppression articles par les boutons-------------------------------------------
+//Selection de tous les boutons supprimer
+let btn_supprimer = document.querySelectorAll(".supprimer");
+console.log(btn_supprimer);
 
-    
-          
-            
-    
+for (let l = 0 ; l < btn_supprimer.length; l++){
+    btn_supprimer[l].addEventListener( "click", (event) => {
+        event.preventDefault() ;
+    // selection de l'id et de la couleur du produit à supprimer
+    let produit_suppression = produitEnregistreDansLocalstorage[l].id_ProduitSelectionner + produitEnregistreDansLocalstorage[l].optionCouleur;
+    console.log(produit_suppression);
 
-          
-    
-    
-  
-//  // Btn supprimer article //
-//  const deleteItem = document.querySelectorAll(".supprimer");
-//  console.log(deleteItem);
-//  //ecoute des boutons supprimer
-//  deleteItem.addEventListener("click",(event) =>{
-//  event.preventDefault() ; 
-// // selection de l'id du produit qui sera supprimer au clic sur le bouton
-//  let suppressionIdSelected = produitEnregistreDansLocalstorage[k].id_ProduitSelectionner;
-//   })
+    // Utilisation de la méthode filter : selection des éléments à garder et suppression de l'élément où je clique
+    produitEnregistreDansLocalstorage = produitEnregistreDansLocalstorage.filter (element => element.id_ProduitSelectionner + element.optionCouleur !== produit_suppression); // le ! inverse la selection
+    console.log(produitEnregistreDansLocalstorage);
+    // envoie de la variable dans le localStorage
+    localStorage.setItem("produit",JSON.stringify(produitEnregistreDansLocalstorage));
+    // alerte: produit supprimer et rechargement de la page
+    alert("le produit a bien été supprimé du panier")
+    window.location.href ="panier.html" ;
+    })
+
 }
