@@ -43,9 +43,9 @@ positionElement.innerHTML = panierVide ;
                          </td>
                          <td>
                          <div id="optionQuantite">
-                            <button  class="btnMore" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur}"><i class="fas fa-plus-circle"></i></button>
+                            <button  class="btnMore" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur.split(" ").join()}"><i class="fas fa-plus-circle"></i></button>
                             <div class="valueQuantity Quantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}${produitEnregistreDansLocalstorage[k].optionCouleur}">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
-                            <button  class="btnLess" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur}"><i class="fas fa-minus-circle"></i></button>
+                            <button  class="btnLess" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur.split(" ").join()}"><i class="fas fa-minus-circle"></i></button>
                         </div>
                          </td>
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
@@ -67,8 +67,6 @@ structureProduitPanier += `
 </table>    
            
  </section> 
-
-
 `
 if ( k === produitEnregistreDansLocalstorage.length){
 //injection html dans le panier
@@ -104,8 +102,6 @@ btn_plus.forEach(btn  => {
         })
     let showQuantity = document.querySelector(".Quantity"+ idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
     showQuantity.innerHTML = showQuantity.innerHTML*1+1 ; // envoi dans html de la nouvelle valeur
-    //rechargement de la page 
-    window.location.href ="panier.html";
     
     })
     

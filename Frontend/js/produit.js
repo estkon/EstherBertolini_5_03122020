@@ -129,7 +129,7 @@ console.log(choixQuantite);
 let optionsProduit ={
     name: ours.name ,
     id_ProduitSelectionner : ours._id ,
-    optionCouleur : choixCouleur ,
+    optionCouleur : choixCouleur,
     optionQuantite :  choixQuantite,
     price : ours.price / 100 ,
 };
