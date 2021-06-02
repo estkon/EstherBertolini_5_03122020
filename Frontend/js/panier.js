@@ -49,7 +49,7 @@ positionElement.innerHTML = panierVide ;
                         </div>
                          </td>
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
-                         <td>${prixQuantite} €</td>
+                         <td class="prixQuantite">${prixQuantite} €</td>
                          <td><button class="supprimer"><i class="fas fa-times-circle"></i></button></td>
                      </tr>  
                          
@@ -102,7 +102,12 @@ btn_plus.forEach(btn  => {
         })
     let showQuantity = document.querySelector(".Quantity"+ idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
     showQuantity.innerHTML = showQuantity.innerHTML*1+1 ; // envoi dans html de la nouvelle valeur
-    
+
+        //rechargement de la page pour calcul du prix en fonction de la quantite
+        window.location.href="panier.html";
+
+        //=> fonctionne très bien pour les articles avec couleur simple
+        // => pour les autres la page se recharge et la quantité n'est pas actualisée
     })
     
 
@@ -183,3 +188,9 @@ btn_vider_panier.addEventListener("click", (event) => {
 
 
 })
+//------------------------ Calcul du Prix Total du panier------------------
+// déclaration de la variable qui contient tous les Totaux des produits
+let totaux = [] ;
+// chercher les prix du panier
+const prixQuantite = document.querySelectorAll(".prixQuantite");
+console.log(prixQuantite);
