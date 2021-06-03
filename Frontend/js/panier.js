@@ -2,6 +2,10 @@
 // JSON.parse = conversion des données (JSON) du localstorage en objet JS
 let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
 console.log(produitEnregistreDansLocalstorage);
+// déclaration de la variable "LocalstorageTotal" contient les keys et values du localstorage
+// JSON.parse = conversion des données (JSON) du localstorage en objet JS
+let LocalstorageTotal = JSON.parse(localStorage.getItem("total"));
+console.log(LocalstorageTotal);
 // ----------------------AFFICHAGE DES PRODUITS DU PANIER--------------------------------------------
 // selection de l'élément où sera injecter le code HTML
 const positionElement = document.querySelector("#mainPanier");
@@ -60,7 +64,7 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
     structureProduitPanier += ` 
 <tr>
 <td colspan="3" ><p class="total">Total des produits (TTC)</p</td>
-<td colspan="2">48€ </td>
+<td colspan="2"><p class="totalPanier">${LocalstorageTotal} €</p> </td>
 </tr>
 <tr> 
 <td colspan="5"><button class="btn_vider_panier"> Vider le panier </button> <td> </tr>  
@@ -106,8 +110,6 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                 //rechargement de la page pour calcul du prix en fonction de la quantite
                 window.location.href = "panier.html";
 
-                //=> fonctionne très bien pour les articles avec couleur simple
-                // => pour les autres la page se recharge et la quantité n'est pas actualisée
             })
 
 
@@ -195,13 +197,24 @@ btn_vider_panier.addEventListener("click", (event) => {
 // déclaration de la variable qui contient tous les Totaux des produits
 let totaux = 0;
 // chercher les prix du panier
-const prixQuantite = document.querySelectorAll("td.prixQuantite");
-prixQuantite.forEach(element => {
-    let price = element.innerHTML.split(" ");
-    let priceNumeric = parseInt(price[0]);
+const prixQuantite = document.querySelectorAll("td.prixQuantite");// récupération des éléements :td
+prixQuantite.forEach(element => { //parcourir dans le tableau priquantite les elements td
+    let price = element.innerHTML.split(" "); // price = td.inner HTML sans espace 
+    let priceNumeric = parseInt(price[0]); // ne garder que la valeur numéric
     console.log(priceNumeric);
-    totaux += priceNumeric;
-});
+    totaux += priceNumeric; // addition des valeurs 
+    // récupération dans le local storage de la valeur total
+    localStorage.setItem( "total", JSON.stringify(totaux));
 
-console.log(prixQuantite);
-console.log(totaux);
+});
+console.log(totaux); 
+
+
+
+
+ 
+
+
+
+
+
