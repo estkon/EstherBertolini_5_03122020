@@ -213,6 +213,11 @@ option {
   padding: 0px 6px;
 }
 
+.btn_vider_panier {
+  background-color: white;
+  padding: 0.2em;
+}
+
 header {
   background-color: #f3e9f1;
 }
@@ -520,6 +525,22 @@ th {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+/*---------------*formulaire-----------------*/
+.input {
+  display: flex;
+  justify-content: space-between;
+}
+.input input {
+  width: 90%;
+}
+
+.mail {
+  width: 100%;
+}
+.mail input {
+  width: 95%;
 }
 
 /*medias queries*/
