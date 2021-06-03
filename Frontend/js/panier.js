@@ -2,9 +2,8 @@
 // JSON.parse = conversion des données (JSON) du localstorage en objet JS
 let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
 console.log(produitEnregistreDansLocalstorage);
-// déclaration de la variable "LocalstorageTotal" contient les keys et values du localstorage
-// JSON.parse = conversion des données (JSON) du localstorage en objet JS
-let LocalstorageTotal = JSON.parse(localStorage.getItem("total"));
+// déclaration de la variable "LocalstorageTotal" contient total : value du localstorage
+let LocalstorageTotal = JSON.parse(localStorage.getItem("total")); // récupération de la valeur
 console.log(LocalstorageTotal);
 // ----------------------AFFICHAGE DES PRODUITS DU PANIER--------------------------------------------
 // selection de l'élément où sera injecter le code HTML
@@ -20,7 +19,7 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
 } else {
     // si le panier n'est pas vide : afficher les produits du LocalStorage
     let structureProduitPanier = `
-  <section class="contenu-panier">
+  <section class="ours contenu-panier">
   <h3>1. Validation de votre panier</h3>
   <table id="tableau">
               <tbody>
@@ -71,6 +70,42 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
 </table>    
            
  </section> 
+
+
+ <section class="ours contenu-panier">
+ <h3>2.Formulaire de commande </h3>
+    <form method="post">
+        <div class="input">
+            <p>
+                <label for="Prenom">Votre prénom </label>
+                <input type="text" name="Prenom" id="Prenom" placeholder="Louise"/>
+            </p>
+            <p>
+                <label for="Nom">Votre nom </label>
+                <input type="text" name="Nom" id="Nom" placeholder="Dupuis"/>
+            </p>
+        </div>
+        <div class="input">
+            <p>
+                <label for="adresse">Votre adresse </label>
+                <input type="text" name="adresse" id="adresse" placeholder="5 chemin des prés"/>
+            </p>
+            <p>
+            <label for="ville">Votre ville</label>
+            <input type="text" name="ville" id="ville" placeholder="69000 Lyon"/>
+            </p>
+        </div>
+        <div class ="input ">
+            <p class="mail">
+            <label for="email">Votre email</label>
+            <input type="text" name="email" id="email" placeholder="louise.dupuis@gmail.com"/>
+            </p>
+        </div>
+    </form> 
+    <div class="produit-adopter">
+    <a href="../pages/confirmation.html" id="btn_adopter">Commander</a>
+</div>
+ </section>
 `
     if (k === produitEnregistreDansLocalstorage.length) {
         //injection html dans le panier
@@ -132,6 +167,8 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                             produit.optionQuantite--  // modification
                             let showQuantity = document.querySelector(".Quantity" + idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
                             showQuantity.innerHTML = showQuantity.innerHTML * 1 - 1; // envoi dans html de la nouvelle valeur
+                            let LocalstorageTotal = JSON.parse(localStorage.getItem("total")); // récupération de la valeur
+                            console.log(LocalstorageTotal);
                             //rechargement de la page
                             window.location.href = "panier.html";
                         }
@@ -167,10 +204,9 @@ for (let l = 0; l < btn_supprimer.length; l++) {
         // Utilisation de la méthode filter : selection des éléments à garder et suppression de l'élément où je clique
         produitEnregistreDansLocalstorage = produitEnregistreDansLocalstorage.filter(element => element.id_ProduitSelectionner + element.optionCouleur !== produit_suppression); // le ! inverse la selection
         console.log(produitEnregistreDansLocalstorage);
-        // envoie de la variable dans le localStorage
-        localStorage.setItem("produit", JSON.stringify(produitEnregistreDansLocalstorage));
         // alerte: produit supprimer et rechargement de la page
         alert("le produit a bien été supprimé du panier")
+
         window.location.href = "panier.html";
     })
 
@@ -203,16 +239,16 @@ prixQuantite.forEach(element => { //parcourir dans le tableau priquantite les el
     let priceNumeric = parseInt(price[0]); // ne garder que la valeur numéric
     console.log(priceNumeric);
     totaux += priceNumeric; // addition des valeurs 
-    // récupération dans le local storage de la valeur total
-    localStorage.setItem( "total", JSON.stringify(totaux));
+    // envoi dans le local storage de la valeur total
+    localStorage.setItem("total", JSON.stringify(totaux));
 
 });
-console.log(totaux); 
 
 
 
 
- 
+
+
 
 
 
