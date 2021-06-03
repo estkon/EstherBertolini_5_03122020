@@ -41,7 +41,7 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                             <div class="contenu-panier__text">
                                  <p class="contenu-panier__text--nom">${produitEnregistreDansLocalstorage[k].name}</p>
                                  <p class="contenu-panier__text--color">${produitEnregistreDansLocalstorage[k].optionCouleur}</p>
-                                 <p class="contenu-panier__text--ref">ref=${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}</p>
+                                 
                              </div>
                          </td>
                          <td>
@@ -71,18 +71,17 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
            
  </section> 
 
-
- <section class="ours contenu-panier">
+<section class="ours contenu-panier">
  <h3>2.Formulaire de commande </h3>
     <form method="post">
         <div class="input">
             <p>
                 <label for="Prenom">Votre prénom </label>
-                <input type="text" name="Prenom" id="Prenom" placeholder="Louise"/>
+                <input type="text" name="Prenom" id="prenom" placeholder="Louise"/>
             </p>
             <p>
                 <label for="Nom">Votre nom </label>
-                <input type="text" name="Nom" id="Nom" placeholder="Dupuis"/>
+                <input type="text" name="Nom" id="nom" placeholder="Dupuis"/>
             </p>
         </div>
         <div class="input">
@@ -103,7 +102,7 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
         </div>
     </form> 
     <div class="produit-adopter">
-    <a href="../pages/confirmation.html" id="btn_adopter">Commander</a>
+    <a href="../pages/confirmation.html" id="btn_commander">Commander</a>
 </div>
  </section>
 `
@@ -244,8 +243,36 @@ prixQuantite.forEach(element => { //parcourir dans le tableau priquantite les el
 
 });
 
+//---------------------------Soumettre les valeurs du formulaire-------------------------------
+//-----selection du bouton commander-----------------
+const btnCommander = document.querySelector("#btn_commander");
+//-----ecoute du bouton commander--------------------
+btnCommander.addEventListener("click",(event)=>{
+    event.preventDefault();
+    
+    //recupération valeur formulaire
+    const formulaire = {
+        prenom: document.querySelector("#prenom").value,
+        nom: document.querySelector("#nom").value,
+        adresse: document.querySelector("#adresse").value,
+        ville: document.querySelector("#ville").value,
+        email: document.querySelector("#email").value
+    }
 
+    // mettre l'objet formulaireValues dans le localStorage
+    localStorage.setItem("formulaire",JSON.stringify(formulaire));
+   
 
+    // mettre les produits du panier et le formulaire dans un objet à envoyer au serveur
+    const aEnvoyer = {
+        produitEnregistreDansLocalstorage,
+        formulaire,
+        LocalstorageTotal
+    }
+    console.log("aEnvoyer");
+    console.log(aEnvoyer);
+    
+})
 
 
 
