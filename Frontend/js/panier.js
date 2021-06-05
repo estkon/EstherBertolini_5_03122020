@@ -1,3 +1,4 @@
+  
 // déclaration de la variable "produitEnregistreDansLocalstorage" contient les keys et values du localstorage
 // JSON.parse = conversion des données (JSON) du localstorage en objet JS
 let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
@@ -52,7 +53,7 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                         </div>
                          </td>
                          <td>${produitEnregistreDansLocalstorage[k].price} €</td>
-                         <td class="prixQuantite">${prixQuantite} €</td>
+                         <td data-prix="${produitEnregistreDansLocalstorage[k].price}"class="prixQuantite prixQuantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}${produitEnregistreDansLocalstorage[k].optionCouleur.split(" ").join("")}">${prixQuantite} €</td>
                          <td><button class="supprimer"><i class="fas fa-times-circle"></i></button></td>
                      </tr>  
                          
@@ -70,7 +71,6 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
 </table>    
            
  </section> 
-
 <section class="ours contenu-panier">
  <h3>2.Formulaire de commande </h3>
     <form method="post">
@@ -125,6 +125,8 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                 console.log(this.dataset.color)
                 let colorProduit = this.dataset.color;
                 let idProduit = this.dataset.id;
+                let prixQuantite = document.querySelector(`.prixQuantity${idProduit}${colorProduit}`)
+                let prixProduit = prixQuantite.dataset.prix;
                 let nouveauTableau = [];
                 produitEnregistreDansLocalstorage.map(produit => {
                     if (produit.id_ProduitSelectionner == idProduit && produit.optionCouleur.split(" ").join("") == colorProduit) {
@@ -137,13 +139,13 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                     if (produitEnregistreDansLocalstorage.indexOf(produit) == produitEnregistreDansLocalstorage.length - 1) {
                         localStorage.setItem("produit", JSON.stringify(nouveauTableau));
                     }
+                
                 })
                 let showQuantity = document.querySelector(".Quantity" + idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
                 showQuantity.innerHTML = showQuantity.innerHTML * 1 + 1; // envoi dans html de la nouvelle valeur
-
-                //rechargement de la page pour calcul du prix en fonction de la quantite
-                window.location.href = "panier.html";
-
+                prixQuantite.innerHTML = prixProduit*showQuantity.innerHTML + "€"
+                
+                obtenirTotalPanier();
             })
 
 
@@ -159,9 +161,11 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                 console.log(this.dataset.color)
                 let colorProduit = this.dataset.color;
                 let idProduit = this.dataset.id;
+                let prixQuantite = document.querySelector(`.prixQuantity${idProduit}${colorProduit}`)
+                let prixProduit = prixQuantite.dataset.prix;
                 let nouveauTableau = [];
                 produitEnregistreDansLocalstorage.map(produit => {
-                    if (produit.id_ProduitSelectionner == idProduit && produit.optionCouleur == colorProduit) {
+                    if (produit.id_ProduitSelectionner == idProduit && produit.optionCouleur.split(" ").join("") == colorProduit) {
                         if (produit.optionQuantite > 1) {
                             produit.optionQuantite--  // modification
                             let showQuantity = document.querySelector(".Quantity" + idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
@@ -179,9 +183,9 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                     if (produitEnregistreDansLocalstorage.indexOf(produit) == produitEnregistreDansLocalstorage.length - 1) {
                         localStorage.setItem("produit", JSON.stringify(nouveauTableau));
                     }
-
+                    
                 })
-
+                obtenirTotalPanier();
             })
 
         })
@@ -197,12 +201,14 @@ for (let l = 0; l < btn_supprimer.length; l++) {
     btn_supprimer[l].addEventListener("click", (event) => {
         event.preventDefault();
         // selection de l'id et de la couleur du produit à supprimer
-        let produit_suppression = produitEnregistreDansLocalstorage[l].id_ProduitSelectionner + produitEnregistreDansLocalstorage[l].optionCouleur;
-        console.log(produit_suppression);
+        let produit_suppression = produitEnregistreDansLocalstorage[l].id_ProduitSelectionner + produitEnregistreDansLocalstorage[l].optionCouleur.split(" ").join("");
+       
 
-        // Utilisation de la méthode filter : selection des éléments à garder et suppression de l'élément où je clique
-        produitEnregistreDansLocalstorage = produitEnregistreDansLocalstorage.filter(element => element.id_ProduitSelectionner + element.optionCouleur !== produit_suppression); // le ! inverse la selection
-        console.log(produitEnregistreDansLocalstorage);
+        // // Utilisation de la méthode filter : selection des éléments à garder et suppression de l'élément où je clique
+        produitEnregistreDansLocalstorage = produitEnregistreDansLocalstorage.filter(element => element.id_ProduitSelectionner + element.optionCouleur.split(" ").join("")  !== produit_suppression ); // le ! inverse la selection
+        // j'obtiens dans tous les produit sauf celui selectionner
+
+        localStorage.setItem("produit", JSON.stringify(produitEnregistreDansLocalstorage));
         // alerte: produit supprimer et rechargement de la page
         alert("le produit a bien été supprimé du panier")
 
@@ -210,6 +216,7 @@ for (let l = 0; l < btn_supprimer.length; l++) {
     })
 
 }
+
 
 // //-------------------Mise en fonction du bouton vider-panier--------------------------------
 // selection du bouton  class="btn_vider_panier"
@@ -230,6 +237,8 @@ btn_vider_panier.addEventListener("click", (event) => {
 })
 //------------------------ Calcul du Prix Total du panier------------------
 // déclaration de la variable qui contient tous les Totaux des produits
+
+function obtenirTotalPanier(){
 let totaux = 0;
 // chercher les prix du panier
 const prixQuantite = document.querySelectorAll("td.prixQuantite");// récupération des éléements :td
@@ -240,8 +249,11 @@ prixQuantite.forEach(element => { //parcourir dans le tableau priquantite les el
     totaux += priceNumeric; // addition des valeurs 
     // envoi dans le local storage de la valeur total
     localStorage.setItem("total", JSON.stringify(totaux));
-
+    document.querySelector(".totalPanier").innerHTML = totaux + " €";
 });
+}
+obtenirTotalPanier();
+
 
 //---------------------------Soumettre les valeurs du formulaire-------------------------------
 //-----selection du bouton commander-----------------
@@ -273,11 +285,3 @@ btnCommander.addEventListener("click",(event)=>{
     console.log(aEnvoyer);
     
 })
-
-
-
-
-
-
-
-
