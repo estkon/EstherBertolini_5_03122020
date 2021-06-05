@@ -201,13 +201,14 @@ for (let l = 0; l < btn_supprimer.length; l++) {
     btn_supprimer[l].addEventListener("click", (event) => {
         event.preventDefault();
         // selection de l'id et de la couleur du produit à supprimer
-        let produit_suppression = produitEnregistreDansLocalstorage[l].id_ProduitSelectionner + produitEnregistreDansLocalstorage[l].optionCouleur;
-        console.log(produit_suppression);
+        let produit_suppression = produitEnregistreDansLocalstorage[l].id_ProduitSelectionner + produitEnregistreDansLocalstorage[l].optionCouleur.split(" ").join("");
+       
 
-        // Utilisation de la méthode filter : selection des éléments à garder et suppression de l'élément où je clique
-        produitEnregistreDansLocalstorage = produitEnregistreDansLocalstorage.filter(element => element.id_ProduitSelectionner + element.optionCouleur !== produit_suppression); // le ! inverse la selection
-        document.querySelector(".totalPanier").innerHTML = totaux;
-        console.log(produitEnregistreDansLocalstorage);
+        // // Utilisation de la méthode filter : selection des éléments à garder et suppression de l'élément où je clique
+        produitEnregistreDansLocalstorage = produitEnregistreDansLocalstorage.filter(element => element.id_ProduitSelectionner + element.optionCouleur.split(" ").join("")  !== produit_suppression ); // le ! inverse la selection
+        // j'obtiens dans tous les produit sauf celui selectionner
+
+        localStorage.setItem("produit", JSON.stringify(produitEnregistreDansLocalstorage));
         // alerte: produit supprimer et rechargement de la page
         alert("le produit a bien été supprimé du panier")
 
@@ -215,6 +216,7 @@ for (let l = 0; l < btn_supprimer.length; l++) {
     })
 
 }
+
 
 // //-------------------Mise en fonction du bouton vider-panier--------------------------------
 // selection du bouton  class="btn_vider_panier"
@@ -237,7 +239,6 @@ btn_vider_panier.addEventListener("click", (event) => {
 // déclaration de la variable qui contient tous les Totaux des produits
 
 function obtenirTotalPanier(){
-    console.log("la fonction a été appelée")
 let totaux = 0;
 // chercher les prix du panier
 const prixQuantite = document.querySelectorAll("td.prixQuantite");// récupération des éléements :td
