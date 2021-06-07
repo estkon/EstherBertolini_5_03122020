@@ -408,18 +408,28 @@ if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && ema
 };
 
 //-----------------------------------------------------------------------------------------------------------------
+    //récupération des id des produits dans un tableau
+    let productsTab = [];
+    produitEnregistreDansLocalstorage.map(produit => {
+        if (produit.id_ProduitSelectionner ) {
+            productsTab.push(produit.id_ProduitSelectionner) // envoie des modifications dans nouveau tableau
+        } else {
+            productsTab.push(produit.id_ProduitSelectionner)
+        }
+    
+    })
 
     // mettre les produits du panier et le formulaire dans un objet "order" à envoyer au serveur
     const order = {
         contact: {
-            firstName: prenom,
-            lastName: nom,
-            address: adresse,
-            city: ville,
-            email: email,
+            firstName: prenom.value,
+            lastName: nom.value,
+            address: adresse.value,
+            city: ville.value,
+            email: email.value,
         },
     
-        products: produitEnregistreDansLocalstorage,
+        products:  productsTab ,
     }
     console.log("order");
     console.log(order);
@@ -432,7 +442,7 @@ if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && ema
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
     }
     
-    //Envoi au server
+   // Envoi au server
     fetch('http://localhost:3000/api/teddies/order', requestOptions)
         .then((response) => response.json())
         .then((data) => {
