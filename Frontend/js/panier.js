@@ -298,7 +298,7 @@ const alertAdress= (value) => {
 //les regEx
 
 const regExName = (value) => {
-    return /^[A-Za-z]{3,20}$/.test(value);
+    return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/.test(value);
 }
 
 const regExCodePostal = (value) => {
