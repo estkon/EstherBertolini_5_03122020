@@ -1,4 +1,3 @@
-  
 // déclaration de la variable "produitEnregistreDansLocalstorage" contient les keys et values du localstorage
 // JSON.parse = conversion des données (JSON) du localstorage en objet JS
 let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
@@ -407,26 +406,39 @@ if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && ema
     alert("Formulaire incorrect \n Veuillez vérifier vos champs de saisie");
 
 };
-// const lastname = formulaire.nom;
-// const adress = formulaire.adresse;
-// const email= formulaire.email;
-// const city = formulaire.ville;
-
 
 //-----------------------------------------------------------------------------------------------------------------
 
     // mettre les produits du panier et le formulaire dans un objet à envoyer au serveur
-    const aEnvoyer = {
+    const order = {
         produitEnregistreDansLocalstorage,
         formulaire,
         
     }
-    console.log("aEnvoyer");
-    console.log(aEnvoyer);
+    console.log("order");
+    console.log(order);
 
     //Envoi de l'objet "à envoyer" vers le server
-    
-})
+    const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(order),
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    }
+    fetch('http://localhost:3000/api/teddies/order', requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+
+            window.location.href = `${window.location.origin}/confirmation.html?orderId=${data.orderId}`
+        })
+        .catch(() => {
+            alert(error)
+        })
+
+
+    //Voir le résultat
+
+
+});
 
 
 // //-------------------Remplir le formulaire avec les valeurs du localstorage automatiquement --------------
