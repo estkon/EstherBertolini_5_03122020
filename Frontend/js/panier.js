@@ -1,4 +1,3 @@
-  
 // déclaration de la variable "produitEnregistreDansLocalstorage" contient les keys et values du localstorage
 // JSON.parse = conversion des données (JSON) du localstorage en objet JS
 let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
@@ -76,33 +75,33 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
     <form method="post">
         <div class="input">
             <p>
-                <label for="prenom">Votre prénom </label>
+                <label for="prenom">Votre prénom </label><span id="erreurPrenom"></span>
                 <input type="text" name="Prenom" id="prenom" placeholder="Louise"/>
             </p>
             <p>
-                <label for="nom">Votre nom </label>
+                <label for="nom">Votre nom </label><span id="erreurNom"></span>
                 <input type="text" name="Nom" id="nom" placeholder="Dupuis"/>
             </p>
         </div>
         <div class="input">
             <p class="adresse">
-                <label for="adresse">Votre adresse </label>
+                <label for="adresse">Votre adresse </label><span id="erreurAdresse"></span>
                 <input type="text" name="adresse" id="adresse" placeholder="5 chemin des prés"/>
             </p>
         </div>
             <div class="input">
             <p>
-            <label for="code postal">Code Postal</label>
+            <label for="code postal">Code Postal</label><span id="erreurCodePostal"></span>
             <input type="text" name="code Postal" id="codePostal" placeholder="69000"/>
             </p>
             <p>
-            <label for="ville">Votre ville</label>
+            <label for="ville">Votre ville</label><span id="erreurVille"></span>
             <input type="text" name="ville" id="ville" placeholder="Lyon"/>
             </p>
         </div>
         <div class ="input ">
             <p class="mail">
-            <label for="email">Votre email</label>
+            <label for="email">Votre email</label><span id="erreurEmail"></span>
             <input type="text" name="email" id="email" placeholder="louise.dupuis@gmail.com"/>
             </p>
         </div>
@@ -291,10 +290,14 @@ const alertCodePostal = (value) => {
 const alertEmail = (value) => {
     return `${value}: Erreur L'adresse mail saisie est invalide` ;
 }
+
+const alertAdress= (value) => {
+    return `${value}: Erreur L'adresse saisie est incorrecte` ;
+}
 //les regEx
 
 const regExName = (value) => {
-    return /^[A-Za-z]{3,20}$/.test(value);
+    return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/.test(value);
 }
 
 const regExCodePostal = (value) => {
@@ -305,67 +308,96 @@ const regExEmail = (value) => {
     return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
 }
 
+const regExAdress = (value) => {
+    return /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{5,60}$/.test(value); // \s : permet d'autoriser les espaces
+}
+//les fonctions
 function fornameCheck(){
 //vérification de la validite prénom
 const forname = formulaire.prenom;
     if(regExName(forname)){
+        document.querySelector("#erreurPrenom").textContent ="";
         return true ;
     }else{
+        document.querySelector("#erreurPrenom").textContent ="Ce champ comporte une erreur";
         alert(alertName("PRENOM"));       
          return false ;
         
     }
-}
+};
 
 function lastnameCheck(){
     //vérification de la validite Nom
     const lastname = formulaire.nom;
         if(regExName(lastname)){
+            document.querySelector("#erreurNom").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurNom").textContent ="Ce champ comporte une erreur";
             alert(alertName("NOM"));
             return false ;
             
         }
-    }
+    };
 
 function cityCheck(){
     //vérification de la validite Ville
     const city = formulaire.ville;
         if(regExName(city)){
+            document.querySelector("#erreurVille").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurVille").textContent ="Ce champ comporte une erreur";
             alert(alertName("VILLE"));
             return false ;
             
         }
-    }
+    };
 
 function codePostalCheck(){
     //vérification de la validite Code postal
     const codePostal = formulaire.codepostal;
         if(regExCodePostal(codePostal)){
+            document.querySelector("#erreurCodePostal").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurCodePostal").textContent ="Ce champ comporte une erreur";
             alert(alertCodePostal("CODE POSTAL"));
             return false ;
             
         }
-    }
+    };
 
 function emailCheck(){
-    //vérification de la validite Code postal
+    //vérification de la validite email
     const email = formulaire.email;
         if(regExEmail(email)){
+            document.querySelector("#erreurEmail").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurEmail").textContent ="Ce champ comporte une erreur";
             alert(alertEmail("EMAIL"));
             return false ;
             
         }
-    }
+    };
+
+function adressCheck(){
+    //vérification de la validite adresse
+    const adress = formulaire.adresse;
+        if(regExAdress(adress)){
+            document.querySelector("#erreurAdresse").textContent ="";
+            return true ;
+        }else{
+            document.querySelector("#erreurAdresse").textContent ="Ce champ comporte une erreur";
+            alert(alertAdress("ADRESSE"));
+            return false ;
+            
+        }
+    };
+
 // Contrôle de la validité du formulaire et envoi dans localstorage
-if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck()){
+if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck() && adressCheck()){
 
     // mettre l'objet formulaire dans le localStorage
     localStorage.setItem("formulaire",JSON.stringify(formulaire));
@@ -374,26 +406,38 @@ if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && ema
     alert("Formulaire incorrect \n Veuillez vérifier vos champs de saisie");
 
 };
-// const lastname = formulaire.nom;
-// const adress = formulaire.adresse;
-// const email= formulaire.email;
-// const city = formulaire.ville;
-
 
 //-----------------------------------------------------------------------------------------------------------------
 
-    // mettre les produits du panier et le formulaire dans un objet à envoyer au serveur
-    const aEnvoyer = {
-        produitEnregistreDansLocalstorage,
-        formulaire,
+    // mettre les produits du panier et le formulaire dans un objet "order" à envoyer au serveur
+    const order = {
+        produitEnregistreDansLocalstorage,  // => tableau des produits
+        formulaire,                         // => object formulaire
         
     }
-    console.log("aEnvoyer");
-    console.log(aEnvoyer);
+    console.log("order");
+    console.log(order);
 
-    //Envoi de l'objet "à envoyer" vers le server
+    //Envoi de l'objet "order" vers le server
+    //fonction paramètres de la requête
+    const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(order),
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    }
     
-})
+    //Envoi au server
+    fetch('http://localhost:3000/api/teddies/order', requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+
+            // window.location.href = `${window.location.origin}/confirmation.html?orderId=${data.orderId}`
+        })
+        .catch(() => {
+            alert(error)
+        })
+
+});
 
 
 // //-------------------Remplir le formulaire avec les valeurs du localstorage automatiquement --------------
