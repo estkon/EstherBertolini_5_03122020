@@ -279,16 +279,30 @@ btnCommander.addEventListener("click",(event)=>{
     }
 
 //***********************************VERIFICATION CHAMPS FORMULAIRE *****************************************
-//fonction regex utilisable pour Nom;Prenom
+//Les Alertes
 const alertName = (value) => {
     return `${value}: Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20` ;
 }
+
+const alertCodePostal = (value) => {
+    return `${value}: Erreur ce champs ne peut contenir uniquement 5 chiffres` ;
+}
+
+const alertEmail = (value) => {
+    return `${value}: Erreur L'adresse mail saisie est invalide` ;
+}
+//les regEx
+
 const regExName = (value) => {
     return /^[A-Za-z]{3,20}$/.test(value);
 }
 
 const regExCodePostal = (value) => {
     return /^[0-9]{5}$/.test(value);
+}
+
+const regExEmail = (value) => {
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
 }
 
 function fornameCheck(){
@@ -333,13 +347,25 @@ function codePostalCheck(){
         if(regExCodePostal(codePostal)){
             return true ;
         }else{
-            alert(alertName("CODE POSTAL"));
+            alert(alertCodePostal("CODE POSTAL"));
+            return false ;
+            
+        }
+    }
+
+function emailCheck(){
+    //vérification de la validite Code postal
+    const email = formulaire.email;
+        if(regExEmail(email)){
+            return true ;
+        }else{
+            alert(alertEmail("EMAIL"));
             return false ;
             
         }
     }
 // Contrôle de la validité du formulaire et envoi dans localstorage
-if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck()){
+if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck()){
 
     // mettre l'objet formulaire dans le localStorage
     localStorage.setItem("formulaire",JSON.stringify(formulaire));
