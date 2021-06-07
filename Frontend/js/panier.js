@@ -291,6 +291,10 @@ const alertCodePostal = (value) => {
 const alertEmail = (value) => {
     return `${value}: Erreur L'adresse mail saisie est invalide` ;
 }
+
+const alertAdress= (value) => {
+    return `${value}: Erreur L'adresse saisie est incorrecte` ;
+}
 //les regEx
 
 const regExName = (value) => {
@@ -305,6 +309,10 @@ const regExEmail = (value) => {
     return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
 }
 
+const regExAdress = (value) => {
+    return /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{5,60}$/.test(value); // \s : permet d'autoriser les espaces
+}
+//les fonctions
 function fornameCheck(){
 //vérification de la validite prénom
 const forname = formulaire.prenom;
@@ -315,7 +323,7 @@ const forname = formulaire.prenom;
          return false ;
         
     }
-}
+};
 
 function lastnameCheck(){
     //vérification de la validite Nom
@@ -327,7 +335,7 @@ function lastnameCheck(){
             return false ;
             
         }
-    }
+    };
 
 function cityCheck(){
     //vérification de la validite Ville
@@ -339,7 +347,7 @@ function cityCheck(){
             return false ;
             
         }
-    }
+    };
 
 function codePostalCheck(){
     //vérification de la validite Code postal
@@ -351,10 +359,10 @@ function codePostalCheck(){
             return false ;
             
         }
-    }
+    };
 
 function emailCheck(){
-    //vérification de la validite Code postal
+    //vérification de la validite email
     const email = formulaire.email;
         if(regExEmail(email)){
             return true ;
@@ -363,9 +371,22 @@ function emailCheck(){
             return false ;
             
         }
-    }
+    };
+
+function adressCheck(){
+    //vérification de la validite adresse
+    const adress = formulaire.adresse;
+        if(regExAdress(adress)){
+            return true ;
+        }else{
+            alert(alertAdress("ADRESSE"));
+            return false ;
+            
+        }
+    };
+
 // Contrôle de la validité du formulaire et envoi dans localstorage
-if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck()){
+if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck() && adressCheck()){
 
     // mettre l'objet formulaire dans le localStorage
     localStorage.setItem("formulaire",JSON.stringify(formulaire));
