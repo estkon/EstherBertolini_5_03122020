@@ -537,10 +537,10 @@ th {
   width: 90%;
 }
 
-.mail {
+.mail, .adresse {
   width: 100%;
 }
-.mail input {
+.mail input, .adresse input {
   width: 95%;
 }
 

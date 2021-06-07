@@ -85,13 +85,19 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
             </p>
         </div>
         <div class="input">
-            <p>
+            <p class="adresse">
                 <label for="adresse">Votre adresse </label>
                 <input type="text" name="adresse" id="adresse" placeholder="5 chemin des prés"/>
             </p>
+        </div>
+            <div class="input">
+            <p>
+            <label for="code postal">Code Postal</label>
+            <input type="text" name="code Postal" id="codePostal" placeholder="69000"/>
+            </p>
             <p>
             <label for="ville">Votre ville</label>
-            <input type="text" name="ville" id="ville" placeholder="69000 Lyon"/>
+            <input type="text" name="ville" id="ville" placeholder="Lyon"/>
             </p>
         </div>
         <div class ="input ">
@@ -267,6 +273,7 @@ btnCommander.addEventListener("click",(event)=>{
         prenom: document.querySelector("#prenom").value,
         nom: document.querySelector("#nom").value,
         adresse: document.querySelector("#adresse").value,
+        codepostal: document.querySelector("#codePostal").value,
         ville: document.querySelector("#ville").value,
         email: document.querySelector("#email").value
     }
@@ -278,6 +285,10 @@ const alertName = (value) => {
 }
 const regExName = (value) => {
     return /^[A-Za-z]{3,20}$/.test(value);
+}
+
+const regExCodePostal = (value) => {
+    return /^[0-9]{5}$/.test(value);
 }
 
 function fornameCheck(){
@@ -304,7 +315,31 @@ function lastnameCheck(){
         }
     }
 
-if(fornameCheck()  && lastnameCheck()){
+function cityCheck(){
+    //vérification de la validite Ville
+    const city = formulaire.ville;
+        if(regExName(city)){
+            return true ;
+        }else{
+            alert(alertName("VILLE"));
+            return false ;
+            
+        }
+    }
+
+function codePostalCheck(){
+    //vérification de la validite Code postal
+    const codePostal = formulaire.codepostal;
+        if(regExCodePostal(codePostal)){
+            return true ;
+        }else{
+            alert(alertName("CODE POSTAL"));
+            return false ;
+            
+        }
+    }
+// Contrôle de la validité du formulaire et envoi dans localstorage
+if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck()){
 
     // mettre l'objet formulaire dans le localStorage
     localStorage.setItem("formulaire",JSON.stringify(formulaire));
@@ -347,6 +382,7 @@ console.log(keyformulaire);
 document.querySelector("#nom").setAttribute("value", keyformulaire.nom);
 document.querySelector("#prenom").setAttribute("value", keyformulaire.prenom);
 document.querySelector("#adresse").setAttribute("value", keyformulaire.adresse);
+document.querySelector("#codePostal").setAttribute("value", keyformulaire.codepostal);
 document.querySelector("#ville").setAttribute("value", keyformulaire.ville);
 document.querySelector("#email").setAttribute("value", keyformulaire.email);
 
