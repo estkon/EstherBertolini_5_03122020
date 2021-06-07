@@ -286,7 +286,7 @@ const forname = formulaire.prenom;
     if(regExName(forname)){
         return true ;
     }else{
-        alert(alertName("Prénom"));       
+        alert(alertName("PRENOM"));       
          return false ;
         
     }
@@ -298,7 +298,7 @@ function lastnameCheck(){
         if(regExName(lastname)){
             return true ;
         }else{
-            alert(alertName("Nom"));
+            alert(alertName("NOM"));
             return false ;
             
         }
