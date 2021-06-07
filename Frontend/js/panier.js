@@ -76,33 +76,33 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
     <form method="post">
         <div class="input">
             <p>
-                <label for="prenom">Votre prénom </label>
+                <label for="prenom">Votre prénom </label><span id="erreurPrenom"></span>
                 <input type="text" name="Prenom" id="prenom" placeholder="Louise"/>
             </p>
             <p>
-                <label for="nom">Votre nom </label>
+                <label for="nom">Votre nom </label><span id="erreurNom"></span>
                 <input type="text" name="Nom" id="nom" placeholder="Dupuis"/>
             </p>
         </div>
         <div class="input">
             <p class="adresse">
-                <label for="adresse">Votre adresse </label>
+                <label for="adresse">Votre adresse </label><span id="erreurAdresse"></span>
                 <input type="text" name="adresse" id="adresse" placeholder="5 chemin des prés"/>
             </p>
         </div>
             <div class="input">
             <p>
-            <label for="code postal">Code Postal</label>
+            <label for="code postal">Code Postal</label><span id="erreurCodePostal"></span>
             <input type="text" name="code Postal" id="codePostal" placeholder="69000"/>
             </p>
             <p>
-            <label for="ville">Votre ville</label>
+            <label for="ville">Votre ville</label><span id="erreurVille"></span>
             <input type="text" name="ville" id="ville" placeholder="Lyon"/>
             </p>
         </div>
         <div class ="input ">
             <p class="mail">
-            <label for="email">Votre email</label>
+            <label for="email">Votre email</label><span id="erreurEmail"></span>
             <input type="text" name="email" id="email" placeholder="louise.dupuis@gmail.com"/>
             </p>
         </div>
@@ -317,8 +317,10 @@ function fornameCheck(){
 //vérification de la validite prénom
 const forname = formulaire.prenom;
     if(regExName(forname)){
+        document.querySelector("#erreurPrenom").textContent ="";
         return true ;
     }else{
+        document.querySelector("#erreurPrenom").textContent ="Ce champ comporte une erreur";
         alert(alertName("PRENOM"));       
          return false ;
         
@@ -329,8 +331,10 @@ function lastnameCheck(){
     //vérification de la validite Nom
     const lastname = formulaire.nom;
         if(regExName(lastname)){
+            document.querySelector("#erreurNom").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurNom").textContent ="Ce champ comporte une erreur";
             alert(alertName("NOM"));
             return false ;
             
@@ -341,8 +345,10 @@ function cityCheck(){
     //vérification de la validite Ville
     const city = formulaire.ville;
         if(regExName(city)){
+            document.querySelector("#erreurVille").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurVille").textContent ="Ce champ comporte une erreur";
             alert(alertName("VILLE"));
             return false ;
             
@@ -353,8 +359,10 @@ function codePostalCheck(){
     //vérification de la validite Code postal
     const codePostal = formulaire.codepostal;
         if(regExCodePostal(codePostal)){
+            document.querySelector("#erreurCodePostal").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurCodePostal").textContent ="Ce champ comporte une erreur";
             alert(alertCodePostal("CODE POSTAL"));
             return false ;
             
@@ -365,8 +373,10 @@ function emailCheck(){
     //vérification de la validite email
     const email = formulaire.email;
         if(regExEmail(email)){
+            document.querySelector("#erreurEmail").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurEmail").textContent ="Ce champ comporte une erreur";
             alert(alertEmail("EMAIL"));
             return false ;
             
@@ -377,8 +387,10 @@ function adressCheck(){
     //vérification de la validite adresse
     const adress = formulaire.adresse;
         if(regExAdress(adress)){
+            document.querySelector("#erreurAdresse").textContent ="";
             return true ;
         }else{
+            document.querySelector("#erreurAdresse").textContent ="Ce champ comporte une erreur";
             alert(alertAdress("ADRESSE"));
             return false ;
             
