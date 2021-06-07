@@ -409,34 +409,33 @@ if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && ema
 
 //-----------------------------------------------------------------------------------------------------------------
 
-    // mettre les produits du panier et le formulaire dans un objet à envoyer au serveur
+    // mettre les produits du panier et le formulaire dans un objet "order" à envoyer au serveur
     const order = {
-        produitEnregistreDansLocalstorage,
-        formulaire,
+        produitEnregistreDansLocalstorage,  // => tableau des produits
+        formulaire,                         // => object formulaire
         
     }
     console.log("order");
     console.log(order);
 
-    //Envoi de l'objet "à envoyer" vers le server
+    //Envoi de l'objet "order" vers le server
+    //fonction paramètres de la requête
     const requestOptions = {
         method: 'POST',
         body: JSON.stringify(order),
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
     }
+    
+    //Envoi au server
     fetch('http://localhost:3000/api/teddies/order', requestOptions)
         .then((response) => response.json())
         .then((data) => {
 
-            window.location.href = `${window.location.origin}/confirmation.html?orderId=${data.orderId}`
+            // window.location.href = `${window.location.origin}/confirmation.html?orderId=${data.orderId}`
         })
         .catch(() => {
             alert(error)
         })
-
-
-    //Voir le résultat
-
 
 });
 

@@ -1,7 +1,7 @@
 // lien vers API
 let content = ''
 let main = document.getElementById("mainConfirmation");  
-fetch("http://localhost:3000/api/teddies/")
+fetch("http://localhost:3000/api/teddies/${idProduitSelectionner}")
 .then(res => res.json())
 .then (data => {
     data.forEach(ours =>{
