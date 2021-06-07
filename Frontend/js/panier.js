@@ -273,6 +273,9 @@ btnCommander.addEventListener("click",(event)=>{
 
 //***********************************VERIFICATION CHAMPS FORMULAIRE *****************************************
 //fonction regex utilisable pour Nom;Prenom
+const alertName = (value) => {
+    return `${value}: Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20` ;
+}
 const regExName = (value) => {
     return /^[A-Za-z]{3,20}$/.test(value);
 }
@@ -283,8 +286,8 @@ const forname = formulaire.prenom;
     if(regExName(forname)){
         return true ;
     }else{
-        alert("Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20")
-        return false ;
+        alert(alertName("Prénom"));       
+         return false ;
         
     }
 }
@@ -295,7 +298,7 @@ function lastnameCheck(){
         if(regExName(lastname)){
             return true ;
         }else{
-            alert("Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20")
+            alert(alertName("Nom"));
             return false ;
             
         }
