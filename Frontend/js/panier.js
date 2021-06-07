@@ -76,11 +76,11 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
     <form method="post">
         <div class="input">
             <p>
-                <label for="Prenom">Votre prénom </label>
+                <label for="prenom">Votre prénom </label>
                 <input type="text" name="Prenom" id="prenom" placeholder="Louise"/>
             </p>
             <p>
-                <label for="Nom">Votre nom </label>
+                <label for="nom">Votre nom </label>
                 <input type="text" name="Nom" id="nom" placeholder="Dupuis"/>
             </p>
         </div>
@@ -271,7 +271,10 @@ btnCommander.addEventListener("click",(event)=>{
         email: document.querySelector("#email").value
     }
 
-    // mettre l'objet formulaireValues dans le localStorage
+    //-------------------CONTROLE DES DONNEES DU FORMULAIRE-----------------------
+
+
+    // mettre l'objet formulaire dans le localStorage
     localStorage.setItem("formulaire",JSON.stringify(formulaire));
    
 
@@ -279,9 +282,27 @@ btnCommander.addEventListener("click",(event)=>{
     const aEnvoyer = {
         produitEnregistreDansLocalstorage,
         formulaire,
-        LocalstorageTotal
+        
     }
     console.log("aEnvoyer");
     console.log(aEnvoyer);
+
+    //Envoi de l'objet "à envoyer" vers le server
     
 })
+
+
+// //-------------------Remplir le formulaire avec les valeurs du localstorage automatiquement --------------
+// //Récupération de la key "formulaire" et la mettre dans une variable
+const keyformulaire = JSON.parse(localStorage.getItem("formulaire"));
+console.log("keyformulaire");
+console.log(keyformulaire);
+
+
+
+// // mettre les valeurs du local storage dans les champs formulaire
+document.querySelector("#nom").setAttribute("value", keyformulaire.nom);
+document.querySelector("#prenom").setAttribute("value", keyformulaire.prenom);
+document.querySelector("#adresse").setAttribute("value", keyformulaire.adresse);
+document.querySelector("#ville").setAttribute("value", keyformulaire.ville);
+document.querySelector("#email").setAttribute("value", keyformulaire.email);
