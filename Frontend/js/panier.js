@@ -411,9 +411,15 @@ if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && ema
 
     // mettre les produits du panier et le formulaire dans un objet "order" à envoyer au serveur
     const order = {
-        produitEnregistreDansLocalstorage,  // => tableau des produits
-        formulaire,                         // => object formulaire
-        
+        contact: {
+            firstName: prenom,
+            lastName: nom,
+            address: adresse,
+            city: ville,
+            email: email,
+        },
+    
+        products: produitEnregistreDansLocalstorage,
     }
     console.log("order");
     console.log(order);
