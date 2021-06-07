@@ -271,12 +271,52 @@ btnCommander.addEventListener("click",(event)=>{
         email: document.querySelector("#email").value
     }
 
-    //-------------------CONTROLE DES DONNEES DU FORMULAIRE-----------------------
+//***********************************VERIFICATION CHAMPS FORMULAIRE *****************************************
+//fonction regex utilisable pour Nom;Prenom
+const regExName = (value) => {
+    return /^[A-Za-z]{3,20}$/.test(value);
+}
 
+function fornameCheck(){
+//vérification de la validite prénom
+const forname = formulaire.prenom;
+    if(regExName(forname)){
+        return true ;
+    }else{
+        alert("Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20")
+        return false ;
+        
+    }
+}
+
+function lastnameCheck(){
+    //vérification de la validite Nom
+    const lastname = formulaire.nom;
+        if(regExName(lastname)){
+            return true ;
+        }else{
+            alert("Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20")
+            return false ;
+            
+        }
+    }
+
+if(fornameCheck()  && lastnameCheck()){
 
     // mettre l'objet formulaire dans le localStorage
     localStorage.setItem("formulaire",JSON.stringify(formulaire));
-   
+
+}else{
+    alert("Formulaire incorrect \n Veuillez vérifier vos champs de saisie");
+
+};
+// const lastname = formulaire.nom;
+// const adress = formulaire.adresse;
+// const email= formulaire.email;
+// const city = formulaire.ville;
+
+
+//-----------------------------------------------------------------------------------------------------------------
 
     // mettre les produits du panier et le formulaire dans un objet à envoyer au serveur
     const aEnvoyer = {
@@ -306,3 +346,7 @@ document.querySelector("#prenom").setAttribute("value", keyformulaire.prenom);
 document.querySelector("#adresse").setAttribute("value", keyformulaire.adresse);
 document.querySelector("#ville").setAttribute("value", keyformulaire.ville);
 document.querySelector("#email").setAttribute("value", keyformulaire.email);
+
+
+
+
