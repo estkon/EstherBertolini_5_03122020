@@ -396,19 +396,8 @@ function adressCheck(){
         }
     };
 
-// Contrôle de la validité du formulaire et envoi dans localstorage
-if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck() && adressCheck()){
-
-    // mettre l'objet formulaire dans le localStorage
-    localStorage.setItem("formulaire",JSON.stringify(formulaire));
-
-}else{
-    alert("Formulaire incorrect \n Veuillez vérifier vos champs de saisie");
-
-};
-
-//-----------------------------------------------------------------------------------------------------------------
-    //récupération des id des produits dans un tableau
+function orderConfirm(){
+        //récupération des id des produits dans un tableau
     let productsTab = [];
     produitEnregistreDansLocalstorage.map(produit => {
         if (produit.id_ProduitSelectionner ) {
@@ -441,19 +430,37 @@ if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && ema
         body: JSON.stringify(order),
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
     }
-    
+
    // Envoi au server
-    fetch('http://localhost:3000/api/teddies/order', requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
+   fetch('http://localhost:3000/api/teddies/order', requestOptions)
+   .then((response) => response.json())
+   .then((data) => {
+       window.location.href = `confirmation.html?orderId=${data.orderId}`
+       // window.location.href = `${window.location.href}/confirmation.html?orderId=${data.orderId}`
+   })
+   .catch(() => {
+       alert(error)
+   })
+}
 
-            // window.location.href = `${window.location.origin}/confirmation.html?orderId=${data.orderId}`
-        })
-        .catch(() => {
-            alert(error)
-        })
+// Contrôle de la validité du formulaire et envoi dans localstorage
+if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck() && adressCheck()){
+    //-----------------------------------------------------------------------------------------------------------------
+    orderConfirm();
 
+    // mettre l'objet formulaire dans le localStorage
+    localStorage.setItem("formulaire",JSON.stringify(formulaire));
+    
+    
+
+}else{
+    alert("Formulaire incorrect \n Veuillez vérifier vos champs de saisie");
+
+};
+
+   
 });
+// Contrôle de la validité du formulaire et envoi dans localstorage
 
 
 // //-------------------Remplir le formulaire avec les valeurs du localstorage automatiquement --------------
