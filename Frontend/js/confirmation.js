@@ -1,7 +1,17 @@
+// récupération du numero de commande
+const orderId =  new URL(location.href).searchParams.get('orderId') || 'ERREUR';
+console.log("orderId");
+console.log(orderId);
+
+//récupération du total dans le localstorage
+
+let LocalstorageTotal = JSON.parse(localStorage.getItem("total"));
+console.log(LocalstorageTotal);
+
 // lien vers API
 let content = ''
 let main = document.getElementById("mainConfirmation");  
-fetch("http://localhost:3000/api/teddies/${idProduitSelectionner}")
+fetch("http://localhost:3000/api/teddies")
 .then(res => res.json())
 .then (data => {
     data.forEach(ours =>{
@@ -18,12 +28,11 @@ fetch("http://localhost:3000/api/teddies/${idProduitSelectionner}")
 
     <section class="recapitulatif">
         <h3>2. Récapitulatif de commande</h3>
-        <p>Identifiant de commande: XYZ36</p>
-        <p>Montant de la commande: 48€</p>
+        <p id="idCommand" >Numéro de commande: ${orderId}</p>
+        <p>Montant de la commande: ${LocalstorageTotal} €</p>
     </section>
 `
 })
 mainConfirmation.innerHTML = content
 
 })
-.catch(err => console.log(err));
