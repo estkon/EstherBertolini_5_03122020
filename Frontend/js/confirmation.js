@@ -46,3 +46,6 @@ fetch("http://localhost:3000/api/teddies")
 mainConfirmation.innerHTML = content
 
 })
+//vider le local storage
+localStorage.clear();
+localStorage.setItem('product', JSON.stringify([]));
