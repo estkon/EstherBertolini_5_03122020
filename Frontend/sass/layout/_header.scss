@@ -57,7 +57,14 @@ button {
             padding: 12px 0px;
         }
         }
-
+span.decouverte__bold{
+    color: white;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    margin: 0.5em;
+    font-weight: 800;
+}
         /*medias queries*/
 
 @media only screen and (max-width: 320px) {
