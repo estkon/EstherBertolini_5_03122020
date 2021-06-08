@@ -8,6 +8,13 @@ console.log(orderId);
 let LocalstorageTotal = JSON.parse(localStorage.getItem("total"));
 console.log(LocalstorageTotal);
 
+//récupération du nom et du prénom dans le local strorage
+const recupFormulaire = JSON.parse(localStorage.getItem("formulaire"));
+const nom = recupFormulaire.nom;
+const prenom = recupFormulaire.prenom;
+
+
+
 // lien vers API
 let content = ''
 let main = document.getElementById("mainConfirmation");  
@@ -17,6 +24,9 @@ fetch("http://localhost:3000/api/teddies")
     data.forEach(ours =>{
     content= 
     ` <section class="Thanks">
+            <div class="orange user">
+                <p>${prenom} ${nom}</p>
+            </div>
             <p class="violet">
             Nous vous remercions pour votre achat sur Ornibear by Ornico !
             </p>
