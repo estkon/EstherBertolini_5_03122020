@@ -12,22 +12,27 @@ console.log(positionElement);
 //si le panier est vide :afficher le panier est vide
 if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstorage == 0) {
     const panierVide = `
-    <div class="panier-vide">
-        <div> Oooooop's ! <br>Votre panier est vide ... </div> 
-    </div>`;
+            <div class="panier-vide">
+                    <div> Oooooop's ! <br>Votre panier est vide ... </div> 
+                    <div class="produit-adopter">
+                        <a href="../pages/index.html" id="btn_adopter">Retour à l'accueil</a>
+                    </div>
+            </div>
+    
+    </section>`;
     positionElement.innerHTML = panierVide;
 } else {
     // si le panier n'est pas vide : afficher les produits du LocalStorage
     let structureProduitPanier = `
   <section class="ours contenu-panier">
-  <h3>1. Validation de votre panier</h3>
-  <table id="tableau">
-              <tbody>
-                  <th>Produit</th>
-                  <th>Quantité</th>
-                  <th>Prix unitaire</th>
-                  <th>Total</th>
-                  <th>Retirer</th>   
+        <h3>1. Validation de votre panier</h3>
+        <table id="tableau">
+                    <tbody>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire</th>
+                        <th>Total</th>
+                        <th>Retirer</th>   
   ` ;
     //mise en place de la boucle
     for (k = 0; k < produitEnregistreDansLocalstorage.length; k++) {
@@ -71,44 +76,44 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
            
  </section> 
 <section class="ours contenu-panier">
- <h3>2.Formulaire de commande </h3>
-    <form method="post">
-        <div class="input">
-            <p>
-                <label for="prenom">Votre prénom </label><span id="erreurPrenom"></span>
-                <input type="text" name="Prenom" id="prenom" placeholder="Louise"/>
-            </p>
-            <p>
-                <label for="nom">Votre nom </label><span id="erreurNom"></span>
-                <input type="text" name="Nom" id="nom" placeholder="Dupuis"/>
-            </p>
-        </div>
-        <div class="input">
-            <p class="adresse">
-                <label for="adresse">Votre adresse </label><span id="erreurAdresse"></span>
-                <input type="text" name="adresse" id="adresse" placeholder="5 chemin des prés"/>
-            </p>
-        </div>
-            <div class="input">
-            <p>
-            <label for="code postal">Code Postal</label><span id="erreurCodePostal"></span>
-            <input type="text" name="code Postal" id="codePostal" placeholder="69000"/>
-            </p>
-            <p>
-            <label for="ville">Votre ville</label><span id="erreurVille"></span>
-            <input type="text" name="ville" id="ville" placeholder="Lyon"/>
-            </p>
-        </div>
-        <div class ="input ">
-            <p class="mail">
-            <label for="email">Votre email</label><span id="erreurEmail"></span>
-            <input type="text" name="email" id="email" placeholder="louise.dupuis@gmail.com"/>
-            </p>
-        </div>
-    </form> 
-    <div class="produit-adopter">
-    <a href="../pages/confirmation.html" id="btn_commander">Commander</a>
-</div>
+        <h3>2.Formulaire de commande </h3>
+            <form method="post">
+                <div class="input">
+                    <p>
+                        <label for="prenom">Votre prénom </label><span id="erreurPrenom"></span>
+                        <input type="text" name="Prenom" id="prenom" placeholder="Louise"/>
+                    </p>
+                    <p>
+                        <label for="nom">Votre nom </label><span id="erreurNom"></span>
+                        <input type="text" name="Nom" id="nom" placeholder="Dupuis"/>
+                    </p>
+                </div>
+                <div class="input">
+                    <p class="adresse">
+                        <label for="adresse">Votre adresse </label><span id="erreurAdresse"></span>
+                        <input type="text" name="adresse" id="adresse" placeholder="5 chemin des prés"/>
+                    </p>
+                </div>
+                    <div class="input">
+                    <p>
+                        <label for="code postal">Code Postal</label><span id="erreurCodePostal"></span>
+                        <input type="text" name="code Postal" id="codePostal" placeholder="69000"/>
+                    </p>
+                    <p>
+                        <label for="ville">Votre ville</label><span id="erreurVille"></span>
+                        <input type="text" name="ville" id="ville" placeholder="Lyon"/>
+                    </p>
+                </div>
+                <div class ="input ">
+                    <p class="mail">
+                        <label for="email">Votre email</label><span id="erreurEmail"></span>
+                        <input type="text" name="email" id="email" placeholder="louise.dupuis@gmail.com"/>
+                    </p>
+                </div>
+            </form> 
+            <div class="produit-adopter">
+                <a href="../pages/confirmation.html" id="btn_commander">Commander</a>
+            </div>
  </section>
 `
     if (k === produitEnregistreDansLocalstorage.length) {
