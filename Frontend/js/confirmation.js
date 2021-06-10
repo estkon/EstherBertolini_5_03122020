@@ -23,24 +23,24 @@ fetch("http://localhost:3000/api/teddies")
 .then (data => {
     data.forEach(ours =>{
     content= 
-    ` <section class="Thanks">
-            <div class="orange user">
-                <p>${prenom} ${nom}</p>
-            </div>
-            <p class="violet">
-            Nous vous remercions pour votre achat sur Ornibear by Ornico !
-            </p>
-            <p class="orange">
-            Vous retrouverez ci-après un récapitulatif de votre commande.
-            </p>
-            <p class="violet">à bientôt !</p>
-    </section>
+    `   <section class="Thanks">
+                <div class="orange user">
+                    <p>${prenom} ${nom}</p>
+                </div>
+                <p class="violet">
+                Nous vous remercions pour votre achat sur Ornibear by Ornico !
+                </p>
+                <p class="orange">
+                Vous retrouverez ci-après un récapitulatif de votre commande.
+                </p>
+                <p class="violet">à bientôt !</p>
+         </section>
 
-    <section class="recapitulatif">
-        <h3>2. Récapitulatif de commande</h3>
-        <p id="idCommand" >Numéro de commande: ${orderId}</p>
-        <p>Montant de la commande: ${LocalstorageTotal} €</p>
-    </section>
+        <section class="recapitulatif">
+                <h3>2. Récapitulatif de commande</h3>
+                <p id="idCommand" >Numéro de commande: ${orderId}</p>
+                <p>Montant de la commande: ${LocalstorageTotal} €</p>
+        </section>
 `
 })
 mainConfirmation.innerHTML = content
