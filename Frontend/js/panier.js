@@ -14,7 +14,12 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
     const panierVide = `
     <div class="panier-vide">
         <div> Oooooop's ! <br>Votre panier est vide ... </div> 
-    </div>`;
+        <div class="produit-adopter">
+            <a href="../pages/index.html" id="btn_adopter">Retour à l'accueil</a>
+        </div>
+    </div>
+    
+    </section>`;
     positionElement.innerHTML = panierVide;
 } else {
     // si le panier n'est pas vide : afficher les produits du LocalStorage
