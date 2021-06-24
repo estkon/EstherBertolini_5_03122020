@@ -127,81 +127,44 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
         console.log(btn_plus);
         console.log(btn_moins);
 
-
-        //Ecouter les boutons +
-        btn_plus.forEach(btn => {
-            btn.addEventListener("click", function () {
-                console.log(this.dataset.id)
-                console.log(this.dataset.color)
-                let colorProduit = this.dataset.color;
-                let idProduit = this.dataset.id;
-                let prixQuantite = document.querySelector(`.prixQuantity${idProduit}${colorProduit}`)
-                let prixProduit = prixQuantite.dataset.prix;
-                let nouveauTableau = [];
-                produitEnregistreDansLocalstorage.map(produit => {
-                    if (produit.id_ProduitSelectionner == idProduit && produit.optionCouleur.split(" ").join("") == colorProduit) {
-                        produit.optionQuantite++ // modification
-                        nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
-                    } else {
-                        nouveauTableau.push(produit)
+        function adjustProductQuantity (button , type) {
+            button.addEventListener("click", function () {
+                if (produit.id_ProduitSelectionner == idProduit && produit.optionCouleur.split(" ").join("") == colorProduit) {
+                    if (produit.optionQuantite > 1) {
+                        if (type = 'plus') produit.optionQuantite++ // modification
+                        if (type = 'moins') produit.optionQuantite--// modification
+                        let showQuantity = document.querySelector(".Quantity" + idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
+                        if (type = 'plus')showQuantity.innerHTML = showQuantity.innerHTML * 1 + 1; // envoi dans html de la nouvelle valeur
+                        if (type = 'moins')showQuantity.innerHTML = showQuantity.innerHTML * 1 - 1; // envoi dans html de la nouvelle valeur
+                        let LocalstorageTotal = JSON.parse(localStorage.getItem("total")); // récupération de la valeur
+                        console.log(LocalstorageTotal);
+                        //rechargement de la page
+                        window.location.href = "panier.html";
                     }
-                    //donne l'index du produit et verifie si égal à celui du dernier produit du tableau:
-                    if (produitEnregistreDansLocalstorage.indexOf(produit) == produitEnregistreDansLocalstorage.length - 1) {
-                        localStorage.setItem("produit", JSON.stringify(nouveauTableau));
-                    }
+                    nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
+                } else {
+                    nouveauTableau.push(produit)
+                }
+                //donne l'index du produit et verifie si égal à celui du dernier produit du tableau:
+                if (produitEnregistreDansLocalstorage.indexOf(produit) == produitEnregistreDansLocalstorage.length - 1) {
+                    localStorage.setItem("produit", JSON.stringify(nouveauTableau));
+                }
                 
-                })
-                let showQuantity = document.querySelector(".Quantity" + idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
-                showQuantity.innerHTML = showQuantity.innerHTML * 1 + 1; // envoi dans html de la nouvelle valeur
-                prixQuantite.innerHTML = prixProduit*showQuantity.innerHTML + "€"
-                
-                obtenirTotalPanier();
             })
+            obtenirTotalPanier();
+        }
+
+    
 
 
+//Ecouter les boutons +
+btn_moins.forEach(btn => adjustProductQuantity (btn , 'plus') );
 
-        })
-
-
-
-        //  //Ecouter les boutons -
-        btn_moins.forEach(btn => {
-            btn.addEventListener("click", function () {
-                console.log(this.dataset.id)
-                console.log(this.dataset.color)
-                let colorProduit = this.dataset.color;
-                let idProduit = this.dataset.id;
-                let prixQuantite = document.querySelector(`.prixQuantity${idProduit}${colorProduit}`)
-                let prixProduit = prixQuantite.dataset.prix;
-                let nouveauTableau = [];
-                produitEnregistreDansLocalstorage.map(produit => {
-                    if (produit.id_ProduitSelectionner == idProduit && produit.optionCouleur.split(" ").join("") == colorProduit) {
-                        if (produit.optionQuantite > 1) {
-                            produit.optionQuantite--  // modification
-                            let showQuantity = document.querySelector(".Quantity" + idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
-                            showQuantity.innerHTML = showQuantity.innerHTML * 1 - 1; // envoi dans html de la nouvelle valeur
-                            let LocalstorageTotal = JSON.parse(localStorage.getItem("total")); // récupération de la valeur
-                            console.log(LocalstorageTotal);
-                            //rechargement de la page
-                            window.location.href = "panier.html";
-                        }
-                        nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
-                    } else {
-                        nouveauTableau.push(produit)
-                    }
-                    //donne l'index du produit et verifie si égal à celui du dernier produit du tableau:
-                    if (produitEnregistreDansLocalstorage.indexOf(produit) == produitEnregistreDansLocalstorage.length - 1) {
-                        localStorage.setItem("produit", JSON.stringify(nouveauTableau));
-                    }
-                    
-                })
-                obtenirTotalPanier();
-            })
-
-        })
-    }
+//Ecouter les boutons -
+btn_moins.forEach(btn => adjustProductQuantity (btn , 'moins') );
+                   
 }
-
+}
 // -----------------------------suppression articles par les boutons-------------------------------------------
 //Selection de tous les boutons supprimer
 let btn_supprimer = document.querySelectorAll(".supprimer");
@@ -483,7 +446,3 @@ document.querySelector("#adresse").setAttribute("value", keyformulaire.adresse);
 document.querySelector("#codePostal").setAttribute("value", keyformulaire.codepostal);
 document.querySelector("#ville").setAttribute("value", keyformulaire.ville);
 document.querySelector("#email").setAttribute("value", keyformulaire.email);
-
-
-
-
