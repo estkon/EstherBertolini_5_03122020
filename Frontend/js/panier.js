@@ -1,16 +1,7 @@
-// déclaration de la variable "produitEnregistreDansLocalstorage" contient les keys et values du localstorage
-// JSON.parse = conversion des données (JSON) du localstorage en objet JS
-let produitEnregistreDansLocalstorage = JSON.parse(localStorage.getItem("produit"));
-console.log(produitEnregistreDansLocalstorage);
-// déclaration de la variable "LocalstorageTotal" contient total : value du localstorage
-let LocalstorageTotal = JSON.parse(localStorage.getItem("total")); // récupération de la valeur
-console.log(LocalstorageTotal);
-// ----------------------AFFICHAGE DES PRODUITS DU PANIER--------------------------------------------
-// selection de l'élément où sera injecter le code HTML
+let productInStorage = JSON.parse(localStorage.getItem('produit'))
+let LocalstorageTotal = JSON.parse(localStorage.getItem("total"));
 const positionElement = document.querySelector("#mainPanier");
-console.log(positionElement);
-//si le panier est vide :afficher le panier est vide
-if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstorage == 0) {
+if (productInStorage === null || productInStorage == 0) {
     const panierVide = `
             <div class="panier-vide">
                     <div> Oooooop's ! <br>Votre panier est vide ... </div> 
@@ -22,7 +13,6 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
     </section>`;
     positionElement.innerHTML = panierVide;
 } else {
-    // si le panier n'est pas vide : afficher les produits du LocalStorage
     let structureProduitPanier = `
   <section class="ours contenu-panier">
         <h3>1. Validation de votre panier</h3>
@@ -34,30 +24,27 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                         <th>Total</th>
                         <th>Retirer</th>   
   ` ;
-    //mise en place de la boucle
-    for (k = 0; k < produitEnregistreDansLocalstorage.length; k++) {
-        //prix en fonction de la quantité
-        let prixQuantite = `${produitEnregistreDansLocalstorage[k].price}` * `${produitEnregistreDansLocalstorage[k].optionQuantite}`;
-
+    for (k = 0; k < productInStorage.length; k++) {
+        let prixQuantite = `${productInStorage[k].price}` * `${productInStorage[k].optionQuantite}`;
         structureProduitPanier = structureProduitPanier +
             `                 
                     <tr>
                          <td >
                             <div class="contenu-panier__text">
-                                 <p class="contenu-panier__text--nom">${produitEnregistreDansLocalstorage[k].name}</p>
-                                 <p class="contenu-panier__text--color">${produitEnregistreDansLocalstorage[k].optionCouleur}</p>
+                                 <p class="contenu-panier__text--nom">${productInStorage[k].name}</p>
+                                 <p class="contenu-panier__text--color">${productInStorage[k].optionCouleur}</p>
                                  
                              </div>
                          </td>
                          <td>
                          <div id="optionQuantite">
-                            <button  class="btnMore" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur.split(" ").join("")}"><i class="fas fa-plus-circle"></i></button>
-                            <div class="valueQuantity Quantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}${produitEnregistreDansLocalstorage[k].optionCouleur.split(" ").join("")}">${produitEnregistreDansLocalstorage[k].optionQuantite}</div>
-                            <button  class="btnLess" data-id="${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}" data-color="${produitEnregistreDansLocalstorage[k].optionCouleur.split(" ").join("")}"><i class="fas fa-minus-circle"></i></button>
+                            <button  class="btnMore"  data-id="${productInStorage[k].id_ProduitSelectionner}" data-color="${productInStorage[k].optionCouleur.split(" ").join("")}"><i class="fas fa-plus-circle"></i></button>
+                            <div class="valueQuantity Quantity${productInStorage[k].id_ProduitSelectionner}${productInStorage[k].optionCouleur.split(" ").join("")}">${productInStorage[k].optionQuantite}</div>
+                            <button  class="btnLess"  data-id="${productInStorage[k].id_ProduitSelectionner}" data-color="${productInStorage[k].optionCouleur.split(" ").join("")}"><i class="fas fa-minus-circle"></i></button>
                         </div>
                          </td>
-                         <td>${produitEnregistreDansLocalstorage[k].price} €</td>
-                         <td data-prix="${produitEnregistreDansLocalstorage[k].price}"class="prixQuantite prixQuantity${produitEnregistreDansLocalstorage[k].id_ProduitSelectionner}${produitEnregistreDansLocalstorage[k].optionCouleur.split(" ").join("")}">${prixQuantite} €</td>
+                         <td>${productInStorage[k].price} €</td>
+                         <td data-prix="${productInStorage[k].price}"class="prixQuantite prixQuantity${productInStorage[k].id_ProduitSelectionner}${productInStorage[k].optionCouleur.split(" ").join("")}">${prixQuantite} €</td>
                          <td><button class="supprimer"><i class="fas fa-times-circle"></i></button></td>
                      </tr>  
                          
@@ -105,66 +92,63 @@ if (produitEnregistreDansLocalstorage === null || produitEnregistreDansLocalstor
                     </p>
                 </div>
                 <div class ="input ">
-                    <p class="mail">
-                        <label for="email">Votre email</label><span id="erreurEmail"></span>
-                        <input type="text" name="email" id="email" placeholder="louise.dupuis@gmail.com"/>
-                    </p>
+                <p class="mail">
+                <label for="email">Votre email</label><span id="erreurEmail"></span>
+                <input type="text" name="email" id="email" placeholder="louise.dupuis@gmail.com"/>
+                </p>
                 </div>
-            </form> 
-            <div class="produit-adopter">
+                </form> 
+                <div class="produit-adopter">
                 <a href="../pages/confirmation.html" id="btn_commander">Commander</a>
-            </div>
- </section>
-`
-    if (k === produitEnregistreDansLocalstorage.length) {
-        //injection html dans le panier
-        positionElement.innerHTML = structureProduitPanier;
-        ////-------------------------------BOUTONS + et - -----------------------------
-        //   Les boutons + et -
-        const btn_plus = document.querySelectorAll(".btnMore");
-        const btn_moins = document.querySelectorAll(".btnLess");
-
-        console.log(btn_plus);
-        console.log(btn_moins);
-
-        function adjustProductQuantity (button , type) {
-            button.addEventListener("click", function () {
-                if (produit.id_ProduitSelectionner == idProduit && produit.optionCouleur.split(" ").join("") == colorProduit) {
-                    if (produit.optionQuantite > 1) {
-                        if (type = 'plus') produit.optionQuantite++ // modification
-                        if (type = 'moins') produit.optionQuantite--// modification
-                        let showQuantity = document.querySelector(".Quantity" + idProduit + colorProduit) // recherche de l'élément html qui contient Quantity+id
-                        if (type = 'plus')showQuantity.innerHTML = showQuantity.innerHTML * 1 + 1; // envoi dans html de la nouvelle valeur
-                        if (type = 'moins')showQuantity.innerHTML = showQuantity.innerHTML * 1 - 1; // envoi dans html de la nouvelle valeur
-                        let LocalstorageTotal = JSON.parse(localStorage.getItem("total")); // récupération de la valeur
-                        console.log(LocalstorageTotal);
-                        //rechargement de la page
-                        window.location.href = "panier.html";
-                    }
-                    nouveauTableau.push(produit) // envoie des modifications dans nouveau tableau
-                } else {
-                    nouveauTableau.push(produit)
-                }
-                //donne l'index du produit et verifie si égal à celui du dernier produit du tableau:
-                if (produitEnregistreDansLocalstorage.indexOf(produit) == produitEnregistreDansLocalstorage.length - 1) {
-                    localStorage.setItem("produit", JSON.stringify(nouveauTableau));
-                }
-                
-            })
-            obtenirTotalPanier();
-        }
-
-    
-
-
-//Ecouter les boutons +
-btn_moins.forEach(btn => adjustProductQuantity (btn , 'plus') );
-
-//Ecouter les boutons -
-btn_moins.forEach(btn => adjustProductQuantity (btn , 'moins') );
-                   
+                </div>
+                </section>
+                `;
+    positionElement.innerHTML = structureProduitPanier;
 }
+//injection html dans le panier
+////-------------------------------BOUTONS + et - -----------------------------
+//   Les boutons + et -
+
+const btn_plus = document.querySelectorAll(".btnMore");
+const btn_moins = document.querySelectorAll(".btnLess");
+btn_plus.forEach(btn => btn.addEventListener('click', function () { adjustProductQuantity(this, 'plus') }))
+btn_moins.forEach(btn => btn.addEventListener('click', function () { adjustProductQuantity(this, 'moins') }))
+
+function adjustProductQuantity(btn, type) {
+
+    if(type == 'plus'){
+        console.log(productInStorage)
+        productInStorage = productInStorage.map(p => {
+            if (p.id_ProduitSelectionner == btn.dataset.id && p.optionCouleur.split(" ").join("") == btn.dataset.color) {
+                p.optionQuantite++
+                btn.parentNode.querySelector('.valueQuantity').innerHTML = p.optionQuantite
+                return p
+            }else{
+                return p
+            }
+        })
+
+    obtenirTotalPanier();
+    }else{
+        productInStorage = productInStorage.map(p => {
+            if (p.id_ProduitSelectionner == btn.dataset.id && p.optionCouleur.split(" ").join("") == btn.dataset.color && p.optionQuantite > 1) {
+                p.optionQuantite--
+                btn.parentNode.querySelector('.valueQuantity').innerHTML = p.optionQuantite
+                return p
+            }else{
+                return p
+            }
+        })
+
+    obtenirTotalPanier();
+
+    }
+
+    localStorage.setItem('produit', JSON.stringify(productInStorage))
+    window.location.reload() // recharger la page pour calculer le prix total et pris des produit 
+    obtenirTotalPanier();
 }
+
 // -----------------------------suppression articles par les boutons-------------------------------------------
 //Selection de tous les boutons supprimer
 let btn_supprimer = document.querySelectorAll(".supprimer");
@@ -174,14 +158,14 @@ for (let l = 0; l < btn_supprimer.length; l++) {
     btn_supprimer[l].addEventListener("click", (event) => {
         event.preventDefault();
         // selection de l'id et de la couleur du produit à supprimer
-        let produit_suppression = produitEnregistreDansLocalstorage[l].id_ProduitSelectionner + produitEnregistreDansLocalstorage[l].optionCouleur.split(" ").join("");
-       
+        let produit_suppression = productInStorage[l].id_ProduitSelectionner + productInStorage[l].optionCouleur.split(" ").join("");
+
 
         // // Utilisation de la méthode filter : selection des éléments à garder et suppression de l'élément où je clique
-        produitEnregistreDansLocalstorage = produitEnregistreDansLocalstorage.filter(element => element.id_ProduitSelectionner + element.optionCouleur.split(" ").join("")  !== produit_suppression ); // le ! inverse la selection
+        productInStorage = productInStorage.filter(element => element.id_ProduitSelectionner + element.optionCouleur.split(" ").join("") !== produit_suppression); // le ! inverse la selection
         // j'obtiens dans tous les produit sauf celui selectionner
 
-        localStorage.setItem("produit", JSON.stringify(produitEnregistreDansLocalstorage));
+        localStorage.setItem("produit", JSON.stringify(productInStorage));
         // alerte: produit supprimer et rechargement de la page
         alert("le produit a bien été supprimé du panier")
 
@@ -211,19 +195,19 @@ btn_vider_panier.addEventListener("click", (event) => {
 //------------------------ Calcul du Prix Total du panier------------------
 // déclaration de la variable qui contient tous les Totaux des produits
 
-function obtenirTotalPanier(){
-let totaux = 0;
-// chercher les prix du panier
-const prixQuantite = document.querySelectorAll("td.prixQuantite");// récupération des éléements :td
-prixQuantite.forEach(element => { //parcourir dans le tableau priquantite les elements td
-    let price = element.innerHTML.split(" "); // price = td.inner HTML sans espace 
-    let priceNumeric = parseInt(price[0]); // ne garder que la valeur numéric
-    console.log(priceNumeric);
-    totaux += priceNumeric; // addition des valeurs 
-    // envoi dans le local storage de la valeur total
-    localStorage.setItem("total", JSON.stringify(totaux));
-    document.querySelector(".totalPanier").innerHTML = totaux + " €";
-});
+function obtenirTotalPanier() {
+    let totaux = 0;
+    // chercher les prix du panier
+    const prixQuantite = document.querySelectorAll("td.prixQuantite");// récupération des éléements :td
+    prixQuantite.forEach(element => { //parcourir dans le tableau priquantite les elements td
+        let price = element.innerHTML.split(" "); // price = td.inner HTML sans espace 
+        let priceNumeric = parseInt(price[0]); // ne garder que la valeur numéric
+        console.log(priceNumeric);
+        totaux += priceNumeric; // addition des valeurs 
+        // envoi dans le local storage de la valeur total
+        localStorage.setItem("total", JSON.stringify(totaux));
+        document.querySelector(".totalPanier").innerHTML = totaux + " €";
+    });
 }
 obtenirTotalPanier();
 
@@ -232,9 +216,9 @@ obtenirTotalPanier();
 //-----selection du bouton commander-----------------
 const btnCommander = document.querySelector("#btn_commander");
 //-----ecoute du bouton commander--------------------
-btnCommander.addEventListener("click",(event)=>{
+btnCommander.addEventListener("click", (event) => {
     event.preventDefault();
-    
+
     //recupération valeur formulaire
     const formulaire = {
         prenom: document.querySelector("#prenom").value,
@@ -245,188 +229,188 @@ btnCommander.addEventListener("click",(event)=>{
         email: document.querySelector("#email").value
     }
 
-//***********************************VERIFICATION CHAMPS FORMULAIRE *****************************************
-//Les Alertes
-const alertName = (value) => {
-    return `${value}: Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20` ;
-}
-
-const alertCodePostal = (value) => {
-    return `${value}: Erreur ce champs ne peut contenir uniquement 5 chiffres` ;
-}
-
-const alertEmail = (value) => {
-    return `${value}: Erreur L'adresse mail saisie est invalide` ;
-}
-
-const alertAdress= (value) => {
-    return `${value}: Erreur L'adresse saisie est incorrecte` ;
-}
-//les regEx
-
-const regExName = (value) => {
-    return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/.test(value);
-}
-
-const regExCodePostal = (value) => {
-    return /^[0-9]{5}$/.test(value);
-}
-
-const regExEmail = (value) => {
-    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
-}
-
-const regExAdress = (value) => {
-    return /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{5,60}$/.test(value); // \s : permet d'autoriser les espaces
-}
-//les fonctions
-function fornameCheck(){
-//vérification de la validite prénom
-const forname = formulaire.prenom;
-    if(regExName(forname)){
-        document.querySelector("#erreurPrenom").textContent ="";
-        return true ;
-    }else{
-        document.querySelector("#erreurPrenom").textContent ="Ce champ comporte une erreur";
-        alert(alertName("PRENOM"));       
-         return false ;
-        
+    //***********************************VERIFICATION CHAMPS FORMULAIRE *****************************************
+    //Les Alertes
+    const alertName = (value) => {
+        return `${value}: Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20`;
     }
-};
 
-function lastnameCheck(){
-    //vérification de la validite Nom
-    const lastname = formulaire.nom;
-        if(regExName(lastname)){
-            document.querySelector("#erreurNom").textContent ="";
-            return true ;
-        }else{
-            document.querySelector("#erreurNom").textContent ="Ce champ comporte une erreur";
-            alert(alertName("NOM"));
-            return false ;
-            
-        }
-    };
+    const alertCodePostal = (value) => {
+        return `${value}: Erreur ce champs ne peut contenir uniquement 5 chiffres`;
+    }
 
-function cityCheck(){
-    //vérification de la validite Ville
-    const city = formulaire.ville;
-        if(regExName(city)){
-            document.querySelector("#erreurVille").textContent ="";
-            return true ;
-        }else{
-            document.querySelector("#erreurVille").textContent ="Ce champ comporte une erreur";
-            alert(alertName("VILLE"));
-            return false ;
-            
-        }
-    };
+    const alertEmail = (value) => {
+        return `${value}: Erreur L'adresse mail saisie est invalide`;
+    }
 
-function codePostalCheck(){
-    //vérification de la validite Code postal
-    const codePostal = formulaire.codepostal;
-        if(regExCodePostal(codePostal)){
-            document.querySelector("#erreurCodePostal").textContent ="";
-            return true ;
-        }else{
-            document.querySelector("#erreurCodePostal").textContent ="Ce champ comporte une erreur";
-            alert(alertCodePostal("CODE POSTAL"));
-            return false ;
-            
-        }
-    };
+    const alertAdress = (value) => {
+        return `${value}: Erreur L'adresse saisie est incorrecte`;
+    }
+    //les regEx
 
-function emailCheck(){
-    //vérification de la validite email
-    const email = formulaire.email;
-        if(regExEmail(email)){
-            document.querySelector("#erreurEmail").textContent ="";
-            return true ;
-        }else{
-            document.querySelector("#erreurEmail").textContent ="Ce champ comporte une erreur";
-            alert(alertEmail("EMAIL"));
-            return false ;
-            
-        }
-    };
+    const regExName = (value) => {
+        return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/.test(value);
+    }
 
-function adressCheck(){
-    //vérification de la validite adresse
-    const adress = formulaire.adresse;
-        if(regExAdress(adress)){
-            document.querySelector("#erreurAdresse").textContent ="";
-            return true ;
-        }else{
-            document.querySelector("#erreurAdresse").textContent ="Ce champ comporte une erreur";
-            alert(alertAdress("ADRESSE"));
-            return false ;
-            
-        }
-    };
+    const regExCodePostal = (value) => {
+        return /^[0-9]{5}$/.test(value);
+    }
 
-function orderConfirm(){
-        //récupération des id des produits dans un tableau
-    let productsTab = [];
-    produitEnregistreDansLocalstorage.map(produit => {
-        if (produit.id_ProduitSelectionner ) {
-            productsTab.push(produit.id_ProduitSelectionner) // envoie des modifications dans nouveau tableau
+    const regExEmail = (value) => {
+        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
+    }
+
+    const regExAdress = (value) => {
+        return /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{5,60}$/.test(value); // \s : permet d'autoriser les espaces
+    }
+    //les fonctions
+    function fornameCheck() {
+        //vérification de la validite prénom
+        const forname = formulaire.prenom;
+        if (regExName(forname)) {
+            document.querySelector("#erreurPrenom").textContent = "";
+            return true;
         } else {
-            productsTab.push(produit.id_ProduitSelectionner)
+            document.querySelector("#erreurPrenom").textContent = "Ce champ comporte une erreur";
+            alert(alertName("PRENOM"));
+            return false;
+
         }
-    
-    })
+    };
 
-    // mettre les produits du panier et le formulaire dans un objet "order" à envoyer au serveur
-    const order = {
-        contact: {
-            firstName: prenom.value,
-            lastName: nom.value,
-            address: adresse.value,
-            city: ville.value,
-            email: email.value,
-        },
-    
-        products:  productsTab ,
+    function lastnameCheck() {
+        //vérification de la validite Nom
+        const lastname = formulaire.nom;
+        if (regExName(lastname)) {
+            document.querySelector("#erreurNom").textContent = "";
+            return true;
+        } else {
+            document.querySelector("#erreurNom").textContent = "Ce champ comporte une erreur";
+            alert(alertName("NOM"));
+            return false;
+
+        }
+    };
+
+    function cityCheck() {
+        //vérification de la validite Ville
+        const city = formulaire.ville;
+        if (regExName(city)) {
+            document.querySelector("#erreurVille").textContent = "";
+            return true;
+        } else {
+            document.querySelector("#erreurVille").textContent = "Ce champ comporte une erreur";
+            alert(alertName("VILLE"));
+            return false;
+
+        }
+    };
+
+    function codePostalCheck() {
+        //vérification de la validite Code postal
+        const codePostal = formulaire.codepostal;
+        if (regExCodePostal(codePostal)) {
+            document.querySelector("#erreurCodePostal").textContent = "";
+            return true;
+        } else {
+            document.querySelector("#erreurCodePostal").textContent = "Ce champ comporte une erreur";
+            alert(alertCodePostal("CODE POSTAL"));
+            return false;
+
+        }
+    };
+
+    function emailCheck() {
+        //vérification de la validite email
+        const email = formulaire.email;
+        if (regExEmail(email)) {
+            document.querySelector("#erreurEmail").textContent = "";
+            return true;
+        } else {
+            document.querySelector("#erreurEmail").textContent = "Ce champ comporte une erreur";
+            alert(alertEmail("EMAIL"));
+            return false;
+
+        }
+    };
+
+    function adressCheck() {
+        //vérification de la validite adresse
+        const adress = formulaire.adresse;
+        if (regExAdress(adress)) {
+            document.querySelector("#erreurAdresse").textContent = "";
+            return true;
+        } else {
+            document.querySelector("#erreurAdresse").textContent = "Ce champ comporte une erreur";
+            alert(alertAdress("ADRESSE"));
+            return false;
+
+        }
+    };
+
+    function orderConfirm() {
+        //récupération des id des produits dans un tableau
+        let productsTab = [];
+        productInStorage.map(produit => {
+            if (produit.id_ProduitSelectionner) {
+                productsTathis.push(produit.id_ProduitSelectionner) // envoie des modifications dans nouveau tableau
+            } else {
+                productsTathis.push(produit.id_ProduitSelectionner)
+            }
+
+        })
+
+        // mettre les produits du panier et le formulaire dans un objet "order" à envoyer au serveur
+        const order = {
+            contact: {
+                firstName: prenom.value,
+                lastName: nom.value,
+                address: adresse.value,
+                city: ville.value,
+                email: email.value,
+            },
+
+            products: productsTab,
+        }
+        console.log("order");
+        console.log(order);
+
+        //Envoi de l'objet "order" vers le server
+        //fonction paramètres de la requête
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(order),
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        }
+
+        // Envoi au server
+        fetch('http://localhost:3000/api/teddies/order', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                window.location.href = `confirmation.html?orderId=${data.orderId}`
+                // window.location.href = `${window.location.href}/confirmation.html?orderId=${data.orderId}`
+            })
+            .catch(() => {
+                alert(error)
+            })
     }
-    console.log("order");
-    console.log(order);
 
-    //Envoi de l'objet "order" vers le server
-    //fonction paramètres de la requête
-    const requestOptions = {
-        method: 'POST',
-        body: JSON.stringify(order),
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
-    }
+    // Contrôle de la validité du formulaire et envoi dans localstorage
+    if (fornameCheck() && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck() && adressCheck()) {
+        //-----------------------------------------------------------------------------------------------------------------
+        orderConfirm();
 
-   // Envoi au server
-   fetch('http://localhost:3000/api/teddies/order', requestOptions)
-   .then((response) => response.json())
-   .then((data) => {
-       window.location.href = `confirmation.html?orderId=${data.orderId}`
-       // window.location.href = `${window.location.href}/confirmation.html?orderId=${data.orderId}`
-   })
-   .catch(() => {
-       alert(error)
-   })
-}
+        // mettre l'objet formulaire dans le localStorage
+        localStorage.setItem("formulaire", JSON.stringify(formulaire));
 
-// Contrôle de la validité du formulaire et envoi dans localstorage
-if(fornameCheck()  && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck() && adressCheck()){
-    //-----------------------------------------------------------------------------------------------------------------
-    orderConfirm();
 
-    // mettre l'objet formulaire dans le localStorage
-    localStorage.setItem("formulaire",JSON.stringify(formulaire));
-    
-    
 
-}else{
-    alert("Formulaire incorrect \n Veuillez vérifier vos champs de saisie");
+    } else {
+        alert("Formulaire incorrect \n Veuillez vérifier vos champs de saisie");
 
-};
+    };
 
-   
+
 });
 // Contrôle de la validité du formulaire et envoi dans localstorage
 
@@ -439,7 +423,7 @@ console.log(keyformulaire);
 
 
 
-// // mettre les valeurs du local storage dans les champs formulaire
+// mettre les valeurs du local storage dans les champs formulaire
 document.querySelector("#nom").setAttribute("value", keyformulaire.nom);
 document.querySelector("#prenom").setAttribute("value", keyformulaire.prenom);
 document.querySelector("#adresse").setAttribute("value", keyformulaire.adresse);
