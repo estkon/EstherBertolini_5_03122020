@@ -9,9 +9,9 @@ let LocalstorageTotal = JSON.parse(localStorage.getItem("total"));
 console.log(LocalstorageTotal);
 
 //récupération du nom et du prénom dans le local strorage
-const recupFormulaire = JSON.parse(localStorage.getItem("formulaire"));
-const nom = recupFormulaire.nom;
-const prenom = recupFormulaire.prenom;
+const recupFormulaire = JSON.parse(localStorage.getItem("contact"));
+const nom = recupFormulaire.firstName;
+const prenom = recupFormulaire.lastName;
 
 
 
