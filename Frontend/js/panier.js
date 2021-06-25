@@ -229,6 +229,7 @@ btnCommander.addEventListener("click", (event) => {
     } else {
 
         //pas d'erreur on envoie le fetch
+        orderConfirm()
         console.log("pas d'erreur ")
     }
 })
@@ -239,17 +240,17 @@ let regexs = { // list des regexes de chaque input
         erreurContainer: "erreurEmail", // le span qui recevera l'erreur 
         erreur: "Erreur L'adresse mail saisie est invalide" // l'erreur a afficher 
     },
-    nom: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+    Nom: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
         regex: /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/, // la regex
         erreurContainer: "erreurNom", // le span qui recevera l'erreur 
         erreur: "Erreur Le nom saisi est invalide" // l'erreur a afficher 
     },
-    prenom: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+    Prenom: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
         regex: /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/, // la regex
         erreurContainer: "erreurPrenom", // le span qui recevera l'erreur 
         erreur: "Erreur Le prenom saisi est invalide" // l'erreur a afficher 
     },
-    adress: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+    adresse: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
         regex: /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{5,60}$/, // \s : permet d'autoriser les espaces, // la regex
         erreurContainer: "erreurAdresse", // le span qui recevera l'erreur 
         erreur: "Erreur L'adresse saisie est invalide" // l'erreur a afficher 
@@ -276,7 +277,7 @@ let regexs = { // list des regexes de chaque input
 
 function checkRegexValue(input) {
     let inputName = input.getAttribute('name') //input name = input avec attribut name
-    let elementToTest = regexs[inputName].value
+    let elementToTest = regexs[inputName]
     if (!elementToTest.regex.test(input.value)) {
         document.querySelector(`#${elementToTest.erreurContainer}`).innerHTML = elementToTest.erreur
         return true
@@ -288,11 +289,12 @@ function checkRegexValue(input) {
 function orderConfirm() {
     //récupération des id des produits dans un tableau
     let productsTab = [];
+    
     productInStorage.map(produit => {
         if (produit.id_ProduitSelectionner) {
-            productsTathis.push(produit.id_ProduitSelectionner) // envoie des modifications dans nouveau tableau
+            productsTab.push(produit.id_ProduitSelectionner) // envoie des modifications dans nouveau tableau
         } else {
-            productsTathis.push(produit.id_ProduitSelectionner)
+            productsTab.push(produit.id_ProduitSelectionner)
         }
 
     })
@@ -324,10 +326,11 @@ function orderConfirm() {
     fetch('http://localhost:3000/api/teddies/order', requestOptions)
         .then((response) => response.json())
         .then((data) => {
+            localStorage.setItem('contact', JSON.stringify(order.contact))
             window.location.href = `confirmation.html?orderId=${data.orderId}`
             // window.location.href = `${window.location.href}/confirmation.html?orderId=${data.orderId}`
         })
-        .catch(() => {
+        .catch((error) => {
             alert(error)
         })
 }
@@ -339,7 +342,3 @@ function orderConfirm() {
 const keyformulaire = JSON.parse(localStorage.getItem("formulaire"));
 console.log("keyformulaire");
 console.log(keyformulaire);
-
-
-
-

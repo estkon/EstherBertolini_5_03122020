@@ -70,19 +70,18 @@ fetch(`http://localhost:3000/api/teddies/${idProduitSelectionner}`)
         //   Les boutons + et -
         const btn_plus = document.querySelector("#btnMore");
         const btn_moins = document.querySelector("#btnLess");
-        var $valueQuantity = document.querySelector("#valueQuantity");  
+        var $valueQuantity = document.querySelector("#valueQuantity");
 
         console.log(btn_plus);
         console.log(btn_moins);
         console.log(valueQuantity);
-                
 
-        //  //Ecouter le bouton +
-         btn_plus.addEventListener("click", (event) => {
+        //Ecouter le bouton +
+        btn_plus.addEventListener("click", (event) => {
             $valueQuantity.innerHTML = parseInt($valueQuantity.innerHTML) + 1
         });
 
-        // //Ecouter le bouton -
+        //Ecouter le bouton -
         btn_moins.addEventListener("click", (event) => {
             var $valueQuantity = document.querySelector("#valueQuantity");
             if (parseInt($valueQuantity.innerHTML) > 1) {
