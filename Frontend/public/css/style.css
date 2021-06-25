@@ -176,7 +176,7 @@ button.connexion {
   margin-left: 13%;
 }
 
-select, .ours__texte--boutons a, .produit-adopter a, #optionQuantite {
+select, .ours__texte--boutons a, .produit-adopter a, #optionQuantite, #btn_commander {
   border-radius: 2em;
   padding: 2px 10px;
   font-size: 12px;

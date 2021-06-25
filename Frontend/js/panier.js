@@ -66,40 +66,40 @@ if (productInStorage === null || productInStorage == 0) {
         <h3>2.Formulaire de commande </h3>
             <form method="post">
                 <div class="input">
-                    <p>
+                    <div>
                         <label for="prenom">Votre prénom </label><span id="erreurPrenom"></span>
-                        <input type="text" name="Prenom" id="prenom" placeholder="Louise"/>
-                    </p>
-                    <p>
+                        <input type="text" name="Prenom" id="prenom" class="form-input" placeholder="Louise"/>
+                    </div>
+                    <div>
                         <label for="nom">Votre nom </label><span id="erreurNom"></span>
-                        <input type="text" name="Nom" id="nom" placeholder="Dupuis"/>
-                    </p>
+                        <input type="text" name="Nom" id="nom" class="form-input" placeholder="Dupuis"/>
+                    </div>
                 </div>
                 <div class="input">
-                    <p class="adresse">
+                    <div class="adresse">
                         <label for="adresse">Votre adresse </label><span id="erreurAdresse"></span>
-                        <input type="text" name="adresse" id="adresse" placeholder="5 chemin des prés"/>
-                    </p>
+                        <input type="text" name="adresse" id="adresse" class="form-input"placeholder="5 chemin des prés"/>
+                    </div>
                 </div>
                     <div class="input">
-                    <p>
+                    <div>
                         <label for="code postal">Code Postal</label><span id="erreurCodePostal"></span>
-                        <input type="text" name="code Postal" id="codePostal" placeholder="69000"/>
-                    </p>
-                    <p>
+                        <input type="text" name="code_postal" id="codePostal" class="form-input" placeholder="69000"/>
+                    </div>
+                    <div>
                         <label for="ville">Votre ville</label><span id="erreurVille"></span>
-                        <input type="text" name="ville" id="ville" placeholder="Lyon"/>
-                    </p>
+                        <input type="text" name="ville" id="ville" class="form-input" placeholder="Lyon"/>
+                    </div>
                 </div>
                 <div class ="input ">
-                <p class="mail">
-                <label for="email">Votre email</label><span id="erreurEmail"></span>
-                <input type="text" name="email" id="email" placeholder="louise.dupuis@gmail.com"/>
-                </p>
+                    <div class="mail">
+                        <label for="email">Votre email</label><span id="erreurEmail"></span>
+                        <input type="text" name="email" id="email" class="form-input" placeholder="louise.dupuis@gmail.com"/>
+                    </div>
                 </div>
                 </form> 
                 <div class="produit-adopter">
-                <a href="../pages/confirmation.html" id="btn_commander">Commander</a>
+                        <button type="submit" id="btn_commander">Commander</button>
                 </div>
                 </section>
                 `;
@@ -212,206 +212,125 @@ function obtenirTotalPanier() {
 obtenirTotalPanier();
 
 
-//---------------------------Soumettre les valeurs du formulaire-------------------------------
+//******************************** FORMULIARE ****************************************************************
 //-----selection du bouton commander-----------------
 const btnCommander = document.querySelector("#btn_commander");
+
 //-----ecoute du bouton commander--------------------
 btnCommander.addEventListener("click", (event) => {
     event.preventDefault();
-
-    //recupération valeur formulaire
-    const formulaire = {
-        prenom: document.querySelector("#prenom").value,
-        nom: document.querySelector("#nom").value,
-        adresse: document.querySelector("#adresse").value,
-        codepostal: document.querySelector("#codePostal").value,
-        ville: document.querySelector("#ville").value,
-        email: document.querySelector("#email").value
-    }
-
-    //***********************************VERIFICATION CHAMPS FORMULAIRE *****************************************
-    //Les Alertes
-    const alertName = (value) => {
-        return `${value}: Erreur ce champs ne doit pas contenir de chiffres ou caractères spéciaux \n Les caractères doivent être compris entre 3 et 20`;
-    }
-
-    const alertCodePostal = (value) => {
-        return `${value}: Erreur ce champs ne peut contenir uniquement 5 chiffres`;
-    }
-
-    const alertEmail = (value) => {
-        return `${value}: Erreur L'adresse mail saisie est invalide`;
-    }
-
-    const alertAdress = (value) => {
-        return `${value}: Erreur L'adresse saisie est incorrecte`;
-    }
-    //les regEx
-
-    const regExName = (value) => {
-        return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/.test(value);
-    }
-
-    const regExCodePostal = (value) => {
-        return /^[0-9]{5}$/.test(value);
-    }
-
-    const regExEmail = (value) => {
-        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
-    }
-
-    const regExAdress = (value) => {
-        return /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{5,60}$/.test(value); // \s : permet d'autoriser les espaces
-    }
-    //les fonctions
-    function fornameCheck() {
-        //vérification de la validite prénom
-        const forname = formulaire.prenom;
-        if (regExName(forname)) {
-            document.querySelector("#erreurPrenom").textContent = "";
-            return true;
-        } else {
-            document.querySelector("#erreurPrenom").textContent = "Ce champ comporte une erreur";
-            alert(alertName("PRENOM"));
-            return false;
-
-        }
-    };
-
-    function lastnameCheck() {
-        //vérification de la validite Nom
-        const lastname = formulaire.nom;
-        if (regExName(lastname)) {
-            document.querySelector("#erreurNom").textContent = "";
-            return true;
-        } else {
-            document.querySelector("#erreurNom").textContent = "Ce champ comporte une erreur";
-            alert(alertName("NOM"));
-            return false;
-
-        }
-    };
-
-    function cityCheck() {
-        //vérification de la validite Ville
-        const city = formulaire.ville;
-        if (regExName(city)) {
-            document.querySelector("#erreurVille").textContent = "";
-            return true;
-        } else {
-            document.querySelector("#erreurVille").textContent = "Ce champ comporte une erreur";
-            alert(alertName("VILLE"));
-            return false;
-
-        }
-    };
-
-    function codePostalCheck() {
-        //vérification de la validite Code postal
-        const codePostal = formulaire.codepostal;
-        if (regExCodePostal(codePostal)) {
-            document.querySelector("#erreurCodePostal").textContent = "";
-            return true;
-        } else {
-            document.querySelector("#erreurCodePostal").textContent = "Ce champ comporte une erreur";
-            alert(alertCodePostal("CODE POSTAL"));
-            return false;
-
-        }
-    };
-
-    function emailCheck() {
-        //vérification de la validite email
-        const email = formulaire.email;
-        if (regExEmail(email)) {
-            document.querySelector("#erreurEmail").textContent = "";
-            return true;
-        } else {
-            document.querySelector("#erreurEmail").textContent = "Ce champ comporte une erreur";
-            alert(alertEmail("EMAIL"));
-            return false;
-
-        }
-    };
-
-    function adressCheck() {
-        //vérification de la validite adresse
-        const adress = formulaire.adresse;
-        if (regExAdress(adress)) {
-            document.querySelector("#erreurAdresse").textContent = "";
-            return true;
-        } else {
-            document.querySelector("#erreurAdresse").textContent = "Ce champ comporte une erreur";
-            alert(alertAdress("ADRESSE"));
-            return false;
-
-        }
-    };
-
-    function orderConfirm() {
-        //récupération des id des produits dans un tableau
-        let productsTab = [];
-        productInStorage.map(produit => {
-            if (produit.id_ProduitSelectionner) {
-                productsTathis.push(produit.id_ProduitSelectionner) // envoie des modifications dans nouveau tableau
-            } else {
-                productsTathis.push(produit.id_ProduitSelectionner)
-            }
-
-        })
-
-        // mettre les produits du panier et le formulaire dans un objet "order" à envoyer au serveur
-        const order = {
-            contact: {
-                firstName: prenom.value,
-                lastName: nom.value,
-                address: adresse.value,
-                city: ville.value,
-                email: email.value,
-            },
-
-            products: productsTab,
-        }
-        console.log("order");
-        console.log(order);
-
-        //Envoi de l'objet "order" vers le server
-        //fonction paramètres de la requête
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(order),
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        }
-
-        // Envoi au server
-        fetch('http://localhost:3000/api/teddies/order', requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                window.location.href = `confirmation.html?orderId=${data.orderId}`
-                // window.location.href = `${window.location.href}/confirmation.html?orderId=${data.orderId}`
-            })
-            .catch(() => {
-                alert(error)
-            })
-    }
-
-    // Contrôle de la validité du formulaire et envoi dans localstorage
-    if (fornameCheck() && lastnameCheck() && cityCheck() && codePostalCheck() && emailCheck() && adressCheck()) {
-        //-----------------------------------------------------------------------------------------------------------------
-        orderConfirm();
-
-        // mettre l'objet formulaire dans le localStorage
-        localStorage.setItem("formulaire", JSON.stringify(formulaire));
-
-
-
+    erreur = 0 //nombre d'erreurs au depart
+    document.querySelectorAll('.form-input').forEach(i =>  {
+        checkRegexValue(i) ? erreur++ : null // si l'input n'est pas valide on incriment le nombre d'erreurs sion on fais rien
+    })
+    if (erreur) {
+        // il y'a des erreur on envoie pas le fetch
+        console.log(erreur)
     } else {
-        alert("Formulaire incorrect \n Veuillez vérifier vos champs de saisie");
 
-    };
+        //pas d'erreur on envoie le fetch
+        console.log("pas d'erreur ")
+    }
+})
+
+let regexs = { // list des regexes de chaque input
+    email: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+        regex: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, // la regex
+        erreurContainer: "erreurEmail", // le span qui recevera l'erreur 
+        erreur: "Erreur L'adresse mail saisie est invalide" // l'erreur a afficher 
+    },
+    nom: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+        regex: /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/, // la regex
+        erreurContainer: "erreurNom", // le span qui recevera l'erreur 
+        erreur: "Erreur Le nom saisi est invalide" // l'erreur a afficher 
+    },
+    prenom: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+        regex: /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/, // la regex
+        erreurContainer: "erreurPrenom", // le span qui recevera l'erreur 
+        erreur: "Erreur Le prenom saisi est invalide" // l'erreur a afficher 
+    },
+    adress: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+        regex: /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{5,60}$/, // \s : permet d'autoriser les espaces, // la regex
+        erreurContainer: "erreurAdresse", // le span qui recevera l'erreur 
+        erreur: "Erreur L'adresse saisie est invalide" // l'erreur a afficher 
+    },
+    ville: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+        regex: /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,20}$/, // la regex
+        erreurContainer: "erreurVille", // le span qui recevera l'erreur 
+        erreur: "Erreur La ville saisie est invalide" // l'erreur a afficher 
+    },
+    code_postal: { // le nom de l'input exemple <input type="email" name="email" > c'est ne name="" qu'on utilise
+        regex: /^[0-9]{5}$/, // la regex
+        erreurContainer: "erreurCodePostal", // le span qui recevera l'erreur 
+        erreur: "Erreur Le code postal saisi est invalide" // l'erreur a afficher 
+    }
+}
+
+/**
+ * 
+ * @param {HTMLInput} input prend un element input en params
+ * @returns true si la value de l' input n'est pas valide 
+ * @returns false si la value de l' input est valide 
+ */
 
 
-});
+function checkRegexValue(input) {
+    let inputName = input.getAttribute('name') //input name = input avec attribut name
+    let elementToTest = regexs[inputName].value
+    if (!elementToTest.regex.test(input.value)) {
+        document.querySelector(`#${elementToTest.erreurContainer}`).innerHTML = elementToTest.erreur
+        return true
+    }
+    return false
+}
+/**----**/
+
+function orderConfirm() {
+    //récupération des id des produits dans un tableau
+    let productsTab = [];
+    productInStorage.map(produit => {
+        if (produit.id_ProduitSelectionner) {
+            productsTathis.push(produit.id_ProduitSelectionner) // envoie des modifications dans nouveau tableau
+        } else {
+            productsTathis.push(produit.id_ProduitSelectionner)
+        }
+
+    })
+
+    // mettre les produits du panier et le formulaire dans un objet "order" à envoyer au serveur
+    const order = {
+        contact: {
+            firstName: document.querySelector("#prenom").value,
+            lastName: document.querySelector("#nom").value,
+            address: document.querySelector("#adresse").value,
+            city: document.querySelector("#ville").value,
+            email: document.querySelector("#email").value
+        },
+
+        products: productsTab,
+    }
+    console.log("order");
+    console.log(order);
+
+    //Envoi de l'objet "order" vers le server
+    //fonction paramètres de la requête
+    const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(order),
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    }
+
+    // Envoi au server
+    fetch('http://localhost:3000/api/teddies/order', requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+            window.location.href = `confirmation.html?orderId=${data.orderId}`
+            // window.location.href = `${window.location.href}/confirmation.html?orderId=${data.orderId}`
+        })
+        .catch(() => {
+            alert(error)
+        })
+}
 // Contrôle de la validité du formulaire et envoi dans localstorage
 
 
@@ -423,10 +342,4 @@ console.log(keyformulaire);
 
 
 
-// mettre les valeurs du local storage dans les champs formulaire
-document.querySelector("#nom").setAttribute("value", keyformulaire.nom);
-document.querySelector("#prenom").setAttribute("value", keyformulaire.prenom);
-document.querySelector("#adresse").setAttribute("value", keyformulaire.adresse);
-document.querySelector("#codePostal").setAttribute("value", keyformulaire.codepostal);
-document.querySelector("#ville").setAttribute("value", keyformulaire.ville);
-document.querySelector("#email").setAttribute("value", keyformulaire.email);
+
